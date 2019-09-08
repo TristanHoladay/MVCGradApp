@@ -5,7 +5,7 @@ using System.Text;
 
 namespace GradAppAPI.Core.Services
 {
-    public interface IUserService
+    public interface IUserRepository
     {
         IEnumerable<User> GetAll();
 

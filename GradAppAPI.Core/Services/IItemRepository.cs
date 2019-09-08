@@ -5,15 +5,15 @@ using System.Text;
 
 namespace GradAppAPI.Core.Services
 {
-    public interface IUserService
+    public interface IItemRepository
     {
-        IEnumerable<User> GetAll();
+        IEnumerable<Item> GetAll();
 
-        User Get(int id);
+        Item Get(int id);
 
-        User Add(User newUser);
+        Item Add(Item newItem);
 
-        User Update(User updatedUser);
+        Item Update(Item updatedItem);
 
         void Delete(int id);
     }
