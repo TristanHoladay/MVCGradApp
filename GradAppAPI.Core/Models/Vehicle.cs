@@ -4,7 +4,7 @@ using System.Text;
 
 namespace GradAppAPI.Core.Models
 {
-    class Vehicle
+    public class Vehicle
     {
         public int Id { get; set; }
         public string Model { get; set; }

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace GradAppAPI.Core.Models
 {
-    class Ticket
+    public class Ticket
     {
         public int Id { get; set; }
         public int Number { get; set; }
