@@ -11,6 +11,6 @@ namespace GradAppAPI.Core.Models
         public string LicensePlate { get; set; }
         public string Status { get; set; }
         public string Notes { get; set; }
-        public IEnumerable<Item> Resources { get; set; }
+        public IEnumerable<Item> VehicleResources { get; set; }
     }
 }
