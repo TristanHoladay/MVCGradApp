@@ -11,5 +11,11 @@ namespace GradAppAPI.Core.Models
         public string Description { get; set; }
         public int Amount { get; set; }
         public int Cost { get; set; }
+
+        public int TypeId { get; set; }
+        public ResourceType ResourceType { get; set; }
+
+        public int VehicleId { get; set; }
+        public Vehicle Vehicle { get; set; }
     }
 }
