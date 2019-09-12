@@ -17,22 +17,50 @@ namespace GradAppAPI.Core.Services
         //GetAll
         public IEnumerable<Item> GetAll()
         {
-            return _itemRepo.GetAll();
+            IEnumerable<Item> resources = _itemRepo.GetAll();
+
+            if(resources == null)
+            {
+                throw new ApplicationException("There are no resources to display.");
+            }
+
+            return resources;
         }
 
         public Item Get(int id)
         {
-            return _itemRepo.Get(id);
+            Item resource = _itemRepo.Get(id);
+
+            if(resource == null)
+            {
+                throw new ApplicationException("That resource does not exist.");
+            }
+
+            return resource;
         }
 
         public Item Add(Item newItem)
         {
-            return _itemRepo.Add(newItem);
+            Item resource = _itemRepo.Add(newItem);
+
+            if(resource == null)
+            {
+                throw new ApplicationException("That resource already exists. You can't create a duplicate of the same resource.");
+            }
+
+            return resource;
         }
 
         public Item Update(Item updatedItem)
         {
-            return _itemRepo.Update(updatedItem);
+            Item resource =  _itemRepo.Update(updatedItem);
+
+            if(resource == null)
+            {
+                throw new ApplicationException("The resource you're trying to update doesn't exist.");
+            }
+
+            return resource;
         }
 
         public void Delete(int id)

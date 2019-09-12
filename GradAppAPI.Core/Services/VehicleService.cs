@@ -17,22 +17,50 @@ namespace GradAppAPI.Core.Services
         //GetAll
         public IEnumerable<Vehicle> GetAll()
         {
-            return _vehicleRepo.GetAll();
+            IEnumerable<Vehicle> vehicles = _vehicleRepo.GetAll();
+
+            if(vehicles == null)
+            {
+                throw new ApplicationException("There are no vehicles to display");
+            }
+
+            return vehicles;
         }
 
         public Vehicle Get(int id)
         {
-            return _vehicleRepo.Get(id);
+            Vehicle vehicle = _vehicleRepo.Get(id);
+
+            if(vehicle == null)
+            {
+                throw new ApplicationException("That vehicle does not exist.");
+            }
+
+            return vehicle;
         }
 
         public Vehicle Add(Vehicle newVehicle)
         {
-            return _vehicleRepo.Add(newVehicle);
+            Vehicle newV =  _vehicleRepo.Add(newVehicle);
+
+            if(newV == null)
+            {
+                throw new ApplicationException("That vehicle already exists. You can't make duplicate entries of the same vehicle");
+            }
+
+            return newV;
         }
 
         public Vehicle Update(Vehicle updatedVehicle)
         {
-            return _vehicleRepo.Update(updatedVehicle);
+            Vehicle updatedV = _vehicleRepo.Update(updatedVehicle);
+
+            if(updatedV == null)
+            {
+                throw new ApplicationException("The vehicle you're trying to update does not exist.");
+            }
+
+            return updatedV;
         }
 
         public void Delete(int id)
