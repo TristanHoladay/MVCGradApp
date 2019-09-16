@@ -10,6 +10,14 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using GradAppAPI.Core.Services;
+using GradAppAPI.Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
+using GradAppAPI.Core.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace GradAppAPI
 {
@@ -26,6 +34,51 @@ namespace GradAppAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.AddDbContext<AppDbContext>();
+
+            services.AddIdentity<User, IdentityRole>()
+                .AddEntityFrameworkStores<AppDbContext>();
+
+            //For determining if published to Azure or not
+            if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Production")
+                services.AddDbContext<AppDbContext>(options =>
+                        options.UseSqlServer(Configuration.GetConnectionString("InventoryDbConnection")));
+            else
+                services.AddDbContext<AppDbContext>(options =>
+                        options.UseSqlite("Data Source=inventory_tracker.db"));
+
+            //Repositories and Services
+            services.AddScoped<IVehicleService, VehicleService>();
+            services.AddScoped<IVehicleRepository, VehicleRepository>();
+            services.AddScoped<IItemService, ItemService>();
+            services.AddScoped<IItemRepository, ItemRepository>();
+            services.AddScoped<ICompanyService, CompanyService>();
+            services.AddScoped<ICompanyRepository, CompanyRepository>();
+            services.AddScoped<IResourceTypeRepository, ResourceTypeRepository>();
+            services.AddScoped<IResourceTypeService, IResourceTypeService>();
+
+            //JWT Support
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
+                };
+            });
+
+            services.AddScoped<IUserService, UserService>();
+            //Add DbInitializer
+            services.AddScoped<DbInitializer>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

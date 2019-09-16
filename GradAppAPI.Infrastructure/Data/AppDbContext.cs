@@ -7,7 +7,7 @@ using System.Text;
 
 namespace GradAppAPI.Infrastructure.Data
 {
-    public class AppDbContext : IdentityDbContext
+    public class AppDbContext : IdentityDbContext<User>
     {
         public DbSet<Company> Companies { get; set; }
         public DbSet<Vehicle> Vehicles { get; set; }
@@ -16,14 +16,16 @@ namespace GradAppAPI.Infrastructure.Data
 
         //public DbSet<User> Users { get; set; }
 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            base.OnConfiguring(optionsBuilder);
+
+            optionsBuilder.UseSqlite("Data Source = ./inventory_tracker.db");
+        }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-        }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlite("Data Source = ../GradAppAPI.Infrastructure/inventory_tracker.db");
         }
 
     }
