@@ -8,7 +8,13 @@ namespace GradAppAPI.Core.Models
     {
         public int Id { get; set; }
         public int Number { get; set; }
+
+        public int ticketOwnerId { get; set; }
         public User TicketOwner { get; set; }
-        public IEnumerable<Item> UsedResources { get; set;}
+        
+
+        //need to adjust for multiple resources used on one ticket
+        public int resourceId { get; set; }
+        public Item Resource { get; set; }
     }
 }

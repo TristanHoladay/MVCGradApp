@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace GradAppAPI.Core.Models
+namespace GradAppAPI.APIModels
 {
-    public class Item
+    public class ItemApiModel
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -12,13 +13,10 @@ namespace GradAppAPI.Core.Models
         public int Amount { get; set; }
         public int Cost { get; set; }
 
-        //collection of Tickets this resource has been used on
-        public IEnumerable<Ticket> Tickets { get; set; }
-
         public int TypeId { get; set; }
-        public ResourceType ResourceType { get; set; }
+        public string ResourceTypeName { get; set; }
 
         public int VehicleId { get; set; }
-        public Vehicle Vehicle { get; set; }
+        public string VehicleName { get; set; }
     }
 }
