@@ -28,5 +28,30 @@ namespace GradAppAPI.APIModels
                     : null
             };
         }
+
+        public static Vehicle ToDomainModel(this VehicleApiModel vehicleModel)
+        {
+            return new Vehicle
+            {
+                Id = vehicleModel.Id,
+                Name = vehicleModel.Name,
+                Model = vehicleModel.Model,
+                LicensePlate = vehicleModel.LicensePlate,
+                Status = vehicleModel.Status,
+                Notes = vehicleModel.Notes,
+                CompanyId = vehicleModel.CompanyId,
+                currentUserId = vehicleModel.currentUserId
+            };
+        }
+
+        public IEnumerable<VehicleApiModel> ToApiModels(this IEnumerable<Vehicle> vehicles)
+        {
+            return vehicles.Select(v => v.ToApiModel());
+        }
+
+        public IEnumerable<Vehicle> ToDomainModels(this IEnumerable<VehicleApiModel> vehicles)
+        {
+            return vehicles.Select(v => v.ToDomainModel());
+        }
     }
 }

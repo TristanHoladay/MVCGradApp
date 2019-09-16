@@ -7,7 +7,7 @@ namespace GradAppAPI.Core.Services
 {
     public interface IUserRepository
     {
-        IEnumerable<User> GetAll();
+        IEnumerable<User> GetAll(int companyId);
 
         User Get(int id);
 

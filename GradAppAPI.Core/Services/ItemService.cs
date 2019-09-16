@@ -15,9 +15,9 @@ namespace GradAppAPI.Core.Services
         }
 
         //GetAll
-        public IEnumerable<Item> GetAll()
+        public IEnumerable<Item> GetAll(int companyId)
         {
-            IEnumerable<Item> resources = _itemRepo.GetAll();
+            IEnumerable<Item> resources = _itemRepo.GetAll(companyId);
 
             if(resources == null)
             {

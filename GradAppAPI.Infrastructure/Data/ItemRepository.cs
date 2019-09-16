@@ -1,5 +1,6 @@
 ﻿using GradAppAPI.Core.Models;
 using GradAppAPI.Core.Services;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,14 +18,18 @@ namespace GradAppAPI.Infrastructure.Data
             _dbContext = dbContext;
         }
 
-        public IEnumerable<Item> GetAll()
+        public IEnumerable<Item> GetAll(int companyId)
         {
-            IEnumerable<Item> itemList = _dbContext.Items.ToList();
+            IEnumerable<Item> itemList = _dbContext.Items.Where(i => i.ResourceType.CompanyId == companyId).ToList();
 
             if (itemList == null)
                 return null;
 
-            return itemList;
+            return _dbContext.Items
+                .Include(i => i.ResourceType)
+                .Include(i => i.Vehicle)
+                .Where(i => i.ResourceType.CompanyId == companyId)
+                .ToList();
         }
 
         public Item Get(int id)
@@ -34,7 +39,10 @@ namespace GradAppAPI.Infrastructure.Data
             if (item == null)
                 return null;
 
-            return item;
+            return _dbContext.Items
+                 .Include(i => i.ResourceType)
+                 .Include(i => i.Vehicle)
+                 .FirstOrDefault(i => i.Id == id);
         }
 
         public Item Add(Item newItem)

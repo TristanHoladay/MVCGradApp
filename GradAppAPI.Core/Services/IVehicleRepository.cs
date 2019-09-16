@@ -8,7 +8,7 @@ namespace GradAppAPI.Core.Services
     public interface IVehicleRepository
     {
         //Get All Vehciles
-        IEnumerable<Vehicle> GetAll();
+        IEnumerable<Vehicle> GetAll(int companyId);
 
         Vehicle Get(int id);
 

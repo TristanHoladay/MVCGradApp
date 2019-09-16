@@ -7,7 +7,7 @@ namespace GradAppAPI.Core.Services
 {
     public interface IItemService
     {
-        IEnumerable<Item> GetAll();
+        IEnumerable<Item> GetAll(int companyId);
 
         Item Get(int id);
 

@@ -17,15 +17,16 @@ namespace GradAppAPI.Infrastructure.Data
             _dbContext = dbContext;
         }
 
-        public IEnumerable<ResourceType> GetAll()
+        public IEnumerable<ResourceType> GetAll(int companyId)
         {
-            IEnumerable<ResourceType> types = _dbContext.ResourceTypes.ToList();
+            IEnumerable<ResourceType> types = _dbContext.ResourceTypes.Where(rt => rt.CompanyId == companyId);
 
             if (types == null)
                 return null;
 
             return _dbContext.ResourceTypes
                 .Include(rt => rt.Company)
+                .Where(rt => rt.CompanyId == companyId)
                 .ToList();
         }
 

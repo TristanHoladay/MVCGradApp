@@ -9,7 +9,7 @@ namespace GradAppAPI.Core.Services
     {
 
         //Get All Vehciles
-        IEnumerable<Vehicle> GetAll();
+        IEnumerable<Vehicle> GetAll(int companyId);
 
         Vehicle Get(int id);
 

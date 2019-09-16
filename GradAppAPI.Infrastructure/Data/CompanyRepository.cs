@@ -17,6 +17,7 @@ namespace GradAppAPI.Infrastructure.Data
             _dbContext = dbContext;
         }
 
+        //Super Admin Access
         public IEnumerable<Company> GetAll()
         {
             IEnumerable<Company> companies = _dbContext.Companies.ToList();
@@ -31,6 +32,8 @@ namespace GradAppAPI.Infrastructure.Data
                 .ToList();
         }
 
+
+        //Company Admin Access
         public Company Get(int id)
         {
             Company company = _dbContext.Companies.FirstOrDefault(c => c.Id == id);
