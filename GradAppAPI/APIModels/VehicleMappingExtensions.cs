@@ -44,12 +44,12 @@ namespace GradAppAPI.APIModels
             };
         }
 
-        public IEnumerable<VehicleApiModel> ToApiModels(this IEnumerable<Vehicle> vehicles)
+        public static IEnumerable<VehicleApiModel> ToApiModels(this IEnumerable<Vehicle> vehicles)
         {
             return vehicles.Select(v => v.ToApiModel());
         }
 
-        public IEnumerable<Vehicle> ToDomainModels(this IEnumerable<VehicleApiModel> vehicles)
+        public static IEnumerable<Vehicle> ToDomainModels(this IEnumerable<VehicleApiModel> vehicles)
         {
             return vehicles.Select(v => v.ToDomainModel());
         }

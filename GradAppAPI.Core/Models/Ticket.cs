@@ -9,7 +9,7 @@ namespace GradAppAPI.Core.Models
         public int Id { get; set; }
         public int Number { get; set; }
 
-        public int ticketOwnerId { get; set; }
+        public int userId { get; set; }
         public User TicketOwner { get; set; }
         
 

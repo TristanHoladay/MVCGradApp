@@ -13,7 +13,7 @@ namespace GradAppAPI.Core.Models
         public int Cost { get; set; }
 
         //collection of Tickets this resource has been used on
-        public IEnumerable<Ticket> Tickets { get; set; }
+        //public IEnumerable<Ticket> Tickets { get; set; }
 
         public int TypeId { get; set; }
         public ResourceType ResourceType { get; set; }

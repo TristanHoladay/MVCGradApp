@@ -27,7 +27,7 @@ namespace GradAppAPI
             _resourceTypeRepo = resourceRepo;
         }
 
-        private void Initialize()
+        public void Initialize()
         {
             AddAdminUser();
             AddTestUsers();

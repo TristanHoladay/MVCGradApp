@@ -35,6 +35,8 @@ namespace GradAppAPI
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
+            services.AddHttpContextAccessor();
+
             services.AddDbContext<AppDbContext>();
 
             services.AddIdentity<User, IdentityRole>()
@@ -48,6 +50,7 @@ namespace GradAppAPI
                 services.AddDbContext<AppDbContext>(options =>
                         options.UseSqlite("Data Source=inventory_tracker.db"));
 
+            services.BuildServiceProvider().GetService<AppDbContext>().Database.Migrate();
             //Repositories and Services
             services.AddScoped<IVehicleService, VehicleService>();
             services.AddScoped<IVehicleRepository, VehicleRepository>();
@@ -56,7 +59,7 @@ namespace GradAppAPI
             services.AddScoped<ICompanyService, CompanyService>();
             services.AddScoped<ICompanyRepository, CompanyRepository>();
             services.AddScoped<IResourceTypeRepository, ResourceTypeRepository>();
-            services.AddScoped<IResourceTypeService, IResourceTypeService>();
+            services.AddScoped<IResourceTypeService, ResourceTypeService>();
 
             //JWT Support
             services.AddAuthentication(options =>
@@ -82,7 +85,7 @@ namespace GradAppAPI
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, DbInitializer dbInitializer)
         {
             if (env.IsDevelopment())
             {
@@ -90,12 +93,18 @@ namespace GradAppAPI
             }
             else
             {
+                app.UseExceptionHandler("/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
 
             app.UseHttpsRedirection();
+
+            app.UseAuthentication();
+
             app.UseMvc();
+
+            dbInitializer.Initialize();
         }
     }
 }
