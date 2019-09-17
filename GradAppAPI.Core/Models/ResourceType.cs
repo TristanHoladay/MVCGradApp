@@ -4,7 +4,7 @@ using System.Text;
 
 namespace GradAppAPI.Core.Models
 {
-    public class ResourceType
+    public class ResourceType : IEntity<int>
     {
         public int Id { get; set; }
 
