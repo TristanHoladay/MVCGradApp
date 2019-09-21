@@ -10,69 +10,33 @@ namespace GradAppAPI
 {
     public class DbInitializer
     {
+        private readonly ICompanyRepository _companyRepo;
         private readonly UserManager<User> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
-        private readonly ICompanyRepository _companyRepo;
         private readonly IVehicleRepository _vehicleRepo;
         private readonly IResourceTypeRepository _resourceTypeRepo;
         private readonly IItemRepository _itemRepo;
 
-        public DbInitializer(UserManager<User> userManager, RoleManager<IdentityRole> roleManager, ICompanyRepository companyRepo, IVehicleRepository vehicleRepo, IItemRepository itemRepo, IResourceTypeRepository resourceRepo)
+
+        public DbInitializer(UserManager<User> userManager, RoleManager<IdentityRole> roleManager, ICompanyRepository companyRepo, IVehicleRepository vehicleRepo, IResourceTypeRepository resourceTypeRepo, IItemRepository itemRepo)
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _companyRepo = companyRepo;
             _vehicleRepo = vehicleRepo;
+            _resourceTypeRepo = resourceTypeRepo;
             _itemRepo = itemRepo;
-            _resourceTypeRepo = resourceRepo;
+
         }
 
         public void Initialize()
         {
             AddAdminUser();
             AddTestUsers();
-            AddTestCompany();
+            AddTestCompanies();
             AddTestVehicles();
             AddTestResourceTypes();
             AddTestItems();
-        }
-
-        private void AddAdminUser()
-        {
-            if (_roleManager.FindByNameAsync("Admin").Result == null)
-            {
-                var adminRole = new IdentityRole
-                {
-                    Name = "Admin",
-                    NormalizedName = "Admin".ToUpper()
-                };
-                var result = _roleManager.CreateAsync(adminRole).Result;
-            }
-
-            var user = CreateUser("admin@bluelayerit.com", "admin", "admin", 1);
-            if (user != null)
-            {
-                _userManager.AddToRoleAsync(user, "Admin").Wait();
-            }
-        }
-
-        private User CreateUser(string email, string firstName, string lastName, int companyId)
-        {
-            if (_userManager.FindByNameAsync(email).Result == null)
-            {
-                User user = new User
-                {
-                    UserName = email,
-                    Email = email,
-                    FirstName = firstName,
-                    LastName = lastName,
-                    CompanyId = companyId,
-                };
-                var result = _userManager.CreateAsync(user, "Testing123!").Result;
-                if (result.Succeeded)
-                    return user;
-            }
-            return null;
         }
 
         public void AddTestUsers()
@@ -97,19 +61,42 @@ namespace GradAppAPI
             {
                 CreateUser(user.Email, user.FirstName, user.LastName, user.CompanyId);
             }
+
         }
 
-        public void AddTestCompany()
+        private User CreateUser(string email, string firstName, string lastName, int companyId)
+        {
+            if (_userManager.FindByNameAsync(email).Result == null)
+            {
+                User user = new User
+                {
+                    UserName = email,
+                    Email = email,
+                    FirstName = firstName,
+                    LastName = lastName,
+                    CompanyId = companyId
+                };
+                // add user
+                var result = _userManager.CreateAsync(user, "Testing123!").Result;
+                if (result.Succeeded) return user;
+            }
+            return null;
+        }
+
+        public void AddTestCompanies()
         {
             if (_companyRepo.GetAll().Count() > 0) return;
 
             Company testCompany = new Company
             {
-                Id = 1,
+
                 Name = "Blue Layer IT",
                 Type = "Managed Services Provider",
                 Status = "Active"
             };
+
+            _companyRepo.Add(testCompany);
+
         }
 
         public void AddTestVehicles()
@@ -139,6 +126,9 @@ namespace GradAppAPI
                 CompanyId = 1,
                 currentUserId = 2,
             };
+
+            _vehicleRepo.Add(testVehicle1);
+            _vehicleRepo.Add(testVehicle2);
         }
 
         public void AddTestResourceTypes()
@@ -158,6 +148,9 @@ namespace GradAppAPI
                 Name = "Ports",
                 CompanyId = 1,
             };
+
+            _resourceTypeRepo.Add(testType1);
+            _resourceTypeRepo.Add(testType2);
         }
 
         public void AddTestItems()
@@ -185,6 +178,48 @@ namespace GradAppAPI
                 TypeId = 2,
                 VehicleId = 2
             };
+
+            _itemRepo.Add(testItem1);
+            _itemRepo.Add(testItem2);
+        }
+
+
+
+        private void AddAdminUser()
+        {
+            // create an Admin role, if it doesn't already exist
+            if (_roleManager.FindByNameAsync("Admin").Result == null)
+            {
+                var adminRole = new IdentityRole
+                {
+                    Name = "Admin",
+                    NormalizedName = "Admin".ToUpper()
+                };
+                var result = _roleManager.CreateAsync(adminRole).Result;
+            }
+
+            var user = CreateUser("admin@test.com", "admin", "admin", 1);
+            if (user != null)
+            {
+                _userManager.AddToRoleAsync(user, "Admin").Wait();
+            }
+            //create an Admin user, if it doesn't already exist
+            if (_userManager.FindByNameAsync("admin").Result == null)
+            {
+                User admin = new User
+                {
+                    UserName = "admin@test.com",
+                    Email = "admin@test.com"
+                };
+
+                // add the Admin user to the Admin role
+                IdentityResult result = _userManager.CreateAsync(admin, "AdminPassword123!").Result;
+
+                if (result.Succeeded)
+                {
+                    _userManager.AddToRoleAsync(admin, "Admin").Wait();
+                }
+            }
         }
     }
 }

@@ -1,13 +1,16 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace GradAppAPI.Core.Models
 {
     public class User : IdentityUser 
-    {
+    {   
+        [Required]
         public string FirstName { get; set; }
+        [Required]
         public string LastName { get; set; }
         public string FullName
         {
@@ -18,6 +21,7 @@ namespace GradAppAPI.Core.Models
         }
         public string JobDescription { get; set; }
 
+        [Required]
         public int CompanyId { get; set; }
         public Company Company { get; set; }
 

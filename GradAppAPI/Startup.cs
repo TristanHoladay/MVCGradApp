@@ -37,31 +37,14 @@ namespace GradAppAPI
 
             services.AddHttpContextAccessor();
 
+            // TODO: add your DbContext
             services.AddDbContext<AppDbContext>();
 
+            // TODO: add identity services
             services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<AppDbContext>();
 
-            //For determining if published to Azure or not
-            if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Production")
-                services.AddDbContext<AppDbContext>(options =>
-                        options.UseSqlServer(Configuration.GetConnectionString("InventoryDbConnection")));
-            else
-                services.AddDbContext<AppDbContext>(options =>
-                        options.UseSqlite("Data Source=inventory_tracker.db"));
-
-            services.BuildServiceProvider().GetService<AppDbContext>().Database.Migrate();
-            //Repositories and Services
-            services.AddScoped<IVehicleService, VehicleService>();
-            services.AddScoped<IVehicleRepository, VehicleRepository>();
-            services.AddScoped<IItemService, ItemService>();
-            services.AddScoped<IItemRepository, ItemRepository>();
-            services.AddScoped<ICompanyService, CompanyService>();
-            services.AddScoped<ICompanyRepository, CompanyRepository>();
-            services.AddScoped<IResourceTypeRepository, ResourceTypeRepository>();
-            services.AddScoped<IResourceTypeService, ResourceTypeService>();
-
-            //JWT Support
+            // TODO: add JWT support
             services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -80,8 +63,21 @@ namespace GradAppAPI
             });
 
             services.AddScoped<IUserService, UserService>();
-            //Add DbInitializer
+
+            // TODO: add the DbInititializer service
             services.AddScoped<DbInitializer>();
+
+            // TODO: add your repositories and services
+            //Repositories and Services
+            services.AddScoped<IVehicleService, VehicleService>();
+            services.AddScoped<IVehicleRepository, VehicleRepository>();
+            services.AddScoped<IItemService, ItemService>();
+            services.AddScoped<IItemRepository, ItemRepository>();
+            services.AddScoped<ICompanyService, CompanyService>();
+            services.AddScoped<ICompanyRepository, CompanyRepository>();
+            services.AddScoped<IResourceTypeRepository, ResourceTypeRepository>();
+            services.AddScoped<IResourceTypeService, ResourceTypeService>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -102,8 +98,7 @@ namespace GradAppAPI
 
             app.UseAuthentication();
 
-            app.UseMvc();
-
+            // TODO: add call to dbInitializer
             dbInitializer.Initialize();
         }
     }

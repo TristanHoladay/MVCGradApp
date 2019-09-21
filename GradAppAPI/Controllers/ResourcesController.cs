@@ -5,12 +5,14 @@ using System.Threading.Tasks;
 using GradAppAPI.APIModels;
 using GradAppAPI.Core.Models;
 using GradAppAPI.Core.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace GradAppAPI.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     public class ResourcesController : Controller
     {
@@ -24,6 +26,7 @@ namespace GradAppAPI.Controllers
 
 
         // GET: api/Companies/CompanyId/Resources
+        [Authorize(Roles = "Super Admin, Admin, User")]
         [HttpGet("/api/companies/{companyId}/resources")]
         public IActionResult GetAll(int companyId)
         {
@@ -40,6 +43,7 @@ namespace GradAppAPI.Controllers
         }
 
         // GET api/resources/5
+        [Authorize(Roles = "Super Admin, Admin, User")]
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
@@ -55,6 +59,7 @@ namespace GradAppAPI.Controllers
         }
 
         // POST api/resources
+        [Authorize(Roles = "Super Admin, Admin, User")]
         [HttpPost]
         public IActionResult Post([FromBody]Item newItem)
         {
@@ -71,6 +76,7 @@ namespace GradAppAPI.Controllers
         }
 
         // PUT api/resources/5
+        [Authorize(Roles = "Super Admin, Admin, User")]
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody]Item updatedItem)
         {
@@ -87,6 +93,7 @@ namespace GradAppAPI.Controllers
         }
 
         // DELETE api/resources/5
+        [Authorize(Roles = "Super Admin, Admin")]
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {

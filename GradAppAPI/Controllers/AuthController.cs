@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using GradAppAPI.APIModels;
 using GradAppAPI.Core.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -15,7 +16,6 @@ using Microsoft.IdentityModel.Tokens;
 namespace GradAppAPI.Controllers
 {
     [Route("api/[controller]")]
-    [ApiController]
     public class AuthController : Controller
     {
 
@@ -29,6 +29,7 @@ namespace GradAppAPI.Controllers
         }
 
         //Post api/register
+        [AllowAnonymous]
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody]RegistrationModel registration)
         {
@@ -42,7 +43,7 @@ namespace GradAppAPI.Controllers
             };
 
             var result = await _userManager.CreateAsync(newUser, registration.Password);
-            if(result.Succeeded)
+            if (result.Succeeded)
             {
                 return Ok(newUser.ToApiModel());
             }
@@ -54,13 +55,14 @@ namespace GradAppAPI.Controllers
         }
 
         //POST api/auth/login
+        [AllowAnonymous]
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody]LoginModel login)
         {
             IActionResult response = Unauthorized();
             var user = await AuthenticateUserAsync(login.Email, login.Password);
 
-            if(user != null)
+            if (user != null)
             {
                 var tokenString = GenerateJSONWebToken(user);
                 response = Ok(new { token = tokenString, email = login.Email });
@@ -92,10 +94,10 @@ namespace GradAppAPI.Controllers
             return tokenHandler.WriteToken(token);
         }
 
-        private async Task<User>  AuthenticateUserAsync(string userName, string password)
+        private async Task<User> AuthenticateUserAsync(string userName, string password)
         {
             var user = await _userManager.FindByNameAsync(userName);
-            if(user != null && await _userManager.CheckPasswordAsync(user, password))
+            if (user != null && await _userManager.CheckPasswordAsync(user, password))
             {
                 return user;
             }

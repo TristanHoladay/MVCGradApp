@@ -16,22 +16,17 @@ namespace GradAppAPI.Infrastructure.Data
         public DbSet<ResourceType> ResourceTypes { get; set; }
 
 
-        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
-        {
-
-        }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            base.OnConfiguring(optionsBuilder);
-
-            optionsBuilder.UseSqlite("Data Source=./inventory_tracker.db");
-        }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
         }
 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            base.OnConfiguring(optionsBuilder);
+
+            optionsBuilder.UseSqlite("Data Source=../GradAppAPI.Infrastructure/inventoryTracker.db");
+        }
     }
 }
