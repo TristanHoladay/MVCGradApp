@@ -31,25 +31,26 @@ namespace GradAppAPI
 
         public void Initialize()
         {
-            AddAdminUser();
-            AddTestUsers();
             AddTestCompanies();
             AddTestVehicles();
             AddTestResourceTypes();
             AddTestItems();
+            AddTestUsers();
+            AddAdminUser();
         }
 
         public void AddTestUsers()
         {
             var testUsers = new[] {
+                //new
+                //{
+                //    Email = "logan@bluelayerit.com",
+                //    FirstName = "Logan",
+                //    LastName = "Papa",
+                //    CompanyId = 1
+                //},
                 new
                 {
-                    Email = "logan@bluelayerit.com",
-                    FirstName = "Logan",
-                    LastName = "Papa",
-                    CompanyId = 1
-                },
-                new {
                     Email = "brian@bluelayerit.com",
                     FirstName = "Brian",
                     LastName = "Ketchum",
@@ -74,11 +75,20 @@ namespace GradAppAPI
                     Email = email,
                     FirstName = firstName,
                     LastName = lastName,
-                    CompanyId = companyId
+                    CompanyId = companyId,
+                    currentVehicleId = 1
                 };
                 // add user
-                var result = _userManager.CreateAsync(user, "Testing123!").Result;
-                if (result.Succeeded) return user;
+                try
+                {
+                    var result = _userManager.CreateAsync(user, "Testing123!").Result;
+                    if (result.Succeeded) return user;
+                }
+                catch(Exception ex)
+                {
+                    var bob = ex.Message;
+                }
+                
             }
             return null;
         }
@@ -89,7 +99,7 @@ namespace GradAppAPI
 
             Company testCompany = new Company
             {
-
+                Id = 1,
                 Name = "Blue Layer IT",
                 Type = "Managed Services Provider",
                 Status = "Active"

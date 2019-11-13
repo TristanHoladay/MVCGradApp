@@ -7,7 +7,7 @@ using System.Text;
 
 namespace GradAppAPI.Infrastructure.Data
 {
-    public class AppDbContext : IdentityDbContext<User>
+    public class AppDbContext : IdentityDbContext
     {
 
         public DbSet<Company> Companies { get; set; }

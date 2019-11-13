@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace GradAppAPI.Infrastructure.Migrations
 {
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -121,11 +121,12 @@ namespace GradAppAPI.Infrastructure.Migrations
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
-                    FirstName = table.Column<string>(nullable: false),
-                    LastName = table.Column<string>(nullable: false),
+                    Discriminator = table.Column<string>(nullable: false),
+                    FirstName = table.Column<string>(nullable: true),
+                    LastName = table.Column<string>(nullable: true),
                     JobDescription = table.Column<string>(nullable: true),
-                    CompanyId = table.Column<int>(nullable: false),
-                    currentVehicleId = table.Column<int>(nullable: false)
+                    CompanyId = table.Column<int>(nullable: true),
+                    currentVehicleId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -292,6 +293,12 @@ namespace GradAppAPI.Infrastructure.Migrations
                 column: "CompanyId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_AspNetUsers_currentVehicleId",
+                table: "AspNetUsers",
+                column: "currentVehicleId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "EmailIndex",
                 table: "AspNetUsers",
                 column: "NormalizedEmail");
@@ -300,12 +307,6 @@ namespace GradAppAPI.Infrastructure.Migrations
                 name: "UserNameIndex",
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AspNetUsers_currentVehicleId",
-                table: "AspNetUsers",
-                column: "currentVehicleId",
                 unique: true);
 
             migrationBuilder.CreateIndex(

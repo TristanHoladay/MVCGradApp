@@ -12,6 +12,7 @@ namespace GradAppAPI.Core.Models
         public string FirstName { get; set; }
         [Required]
         public string LastName { get; set; }
+
         public string FullName
         {
             get
@@ -21,7 +22,7 @@ namespace GradAppAPI.Core.Models
         }
         public string JobDescription { get; set; }
 
-        [Required]
+       
         public int CompanyId { get; set; }
         public Company Company { get; set; }
 

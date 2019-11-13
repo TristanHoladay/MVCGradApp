@@ -98,8 +98,15 @@ namespace GradAppAPI
 
             app.UseAuthentication();
 
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller}/{action=Index}/{id?}");
+            });
+
             // TODO: add call to dbInitializer
-            dbInitializer.Initialize();
+            //dbInitializer.Initialize();
         }
     }
 }

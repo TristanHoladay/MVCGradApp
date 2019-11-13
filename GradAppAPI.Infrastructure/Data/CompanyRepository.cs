@@ -52,8 +52,8 @@ namespace GradAppAPI.Infrastructure.Data
         {
             Company company = _dbContext.Companies.FirstOrDefault(c => c.Id == newCompany.Id);
 
-            if (company == null)
-                return null;
+            //if (company == null)
+            //    return null;
 
             _dbContext.Companies.Add(newCompany);
             _dbContext.SaveChanges();
