@@ -22,15 +22,11 @@ namespace GradAppAPI.Core.Models
         }
         public string JobDescription { get; set; }
 
-       
-        public int CompanyId { get; set; }
-        public Company Company { get; set; }
 
+        public IEnumerable<UseTicket> Tickets { get; set; }
 
-        //public IEnumerable<Ticket> Tickets { get; set; }
-
-        public int currentVehicleId { get; set; }
-        public Vehicle CurrentVehicle { get; set; }
+       // public int currentVehicleId { get; set; }
+       //public Vehicle CurrentVehicle { get; set; }
 
         //History of Vehicles used (?)
         //public IEnumerable<Vehicle> VehiclesUsed { get; set; }

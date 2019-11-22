@@ -12,10 +12,10 @@ namespace GradAppAPI.APIModels
         public string LastName { get; set; }
         public string Email { get; set; }
 
-        public int CompanyId { get; set; }
-        public string CompanyName { get; set; }
+       // public int CompanyId { get; set; }
+       // public string CompanyName { get; set; }
 
-        public int currentVehicleId { get; set; }
-        public string currentVehicleName { get; set; }
+        //public int currentVehicleId { get; set; }
+        //public string currentVehicleName { get; set; }
     }
 }

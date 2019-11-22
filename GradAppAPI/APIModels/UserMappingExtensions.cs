@@ -16,14 +16,14 @@ namespace GradAppAPI.APIModels
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 Email = user.Email,
-                CompanyId = user.CompanyId,
-                CompanyName = user.Company != null
-                    ? user.Company.Name
-                    : null,
-                currentVehicleId = user.currentVehicleId,
-                currentVehicleName = user.CurrentVehicle != null
-                    ? user.CurrentVehicle.Name
-                    : null                
+                //CompanyId = user.CompanyId,
+                //CompanyName = user.Company != null
+                //    ? user.Company.Name
+                //    : null,
+                //currentVehicleId = user.currentVehicleId,
+                //currentVehicleName = user.CurrentVehicle != null
+                //    ? user.CurrentVehicle.Name
+                //    : null                
             };
         }
 

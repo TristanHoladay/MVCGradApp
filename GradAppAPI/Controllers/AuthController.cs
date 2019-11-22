@@ -43,20 +43,28 @@ namespace GradAppAPI.Controllers
                 Email = registration.Email,
                 FirstName = registration.FirstName,
                 LastName = registration.LastName,
-                CompanyId = registration.CompanyId
+                //CompanyId = registration.CompanyId
             };
 
-            var result = await _userManager.CreateAsync(newUser, registration.Password);
-            if (result.Succeeded)
+            try
             {
-                return Ok(newUser.ToApiModel());
+                var result = await _userManager.CreateAsync(newUser, registration.Password);
+                if (result.Succeeded)
+                {
+                    return Ok(newUser.ToApiModel());
+                }
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
             }
-            foreach (var error in result.Errors)
+            catch (Exception e)
             {
-                ModelState.AddModelError(string.Empty, error.Description);
-                return BadRequest(ModelState);
+                var foo = e.Message;
             }
+            // use UserMager to create a new User. Pass in the password so it can be hashed.
             return BadRequest(ModelState);
+
         }
 
         //POST api/auth/login

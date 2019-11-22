@@ -16,14 +16,20 @@ namespace GradAppAPI.Core.Models
         [Required]
         public int Amount { get; set; }
 
+        //cost per unit
         public int Cost { get; set; }
 
         //collection of Tickets this resource has been used on
         //public IEnumerable<Ticket> Tickets { get; set; }
 
         [Required]
-        public int TypeId { get; set; }
+        public int typeId { get; set; }
         public ResourceType ResourceType { get; set; }
+
+        //The item(s) belongs to a specific company
+        public int companyId { get; set; }
+        public Company Company { get; set; }
+
 
         public int VehicleId { get; set; }
         public Vehicle Vehicle { get; set; }

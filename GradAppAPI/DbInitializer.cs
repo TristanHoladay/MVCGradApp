@@ -75,8 +75,8 @@ namespace GradAppAPI
                     Email = email,
                     FirstName = firstName,
                     LastName = lastName,
-                    CompanyId = companyId,
-                    currentVehicleId = 1
+                    //CompanyId = companyId,
+                    //currentVehicleId = 1
                 };
                 // add user
                 try
