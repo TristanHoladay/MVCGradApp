@@ -14,6 +14,7 @@ namespace GradAppAPI.Infrastructure.Data
         public DbSet<Vehicle> Vehicles { get; set; }
         public DbSet<Item> Items { get; set; }
         public DbSet<ResourceType> ResourceTypes { get; set; }
+        public DbSet<UserVehicles> UserVehicles { get; set; }
 
 
 

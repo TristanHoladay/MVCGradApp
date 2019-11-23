@@ -20,15 +20,9 @@ namespace GradAppAPI.Core.Models
 
         public string Status { get; set; }
         public string Notes { get; set; }
-        
-        [Required]
-        public int CompanyId { get; set; }
-        public Company Company { get; set; }
-
-        public int currentUserId { get; set; }
-        public User currentUser { get; set; }
-
 
         public IEnumerable<Item> Resources { get; set; }
+
+        public IEnumerable<UserVehicles> UserAccess { get; set; }
     }
 }

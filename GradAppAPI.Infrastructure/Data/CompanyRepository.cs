@@ -26,9 +26,8 @@ namespace GradAppAPI.Infrastructure.Data
                 return null;
 
             return _dbContext.Companies
-                .Include(c => c.Users)
-                .Include(c => c.VehicleFleet)
-                .Include(c => c.ResourcesTypes)
+                .Include(c => c.Tickets)
+                .Include(c => c.Items)
                 .ToList();
         }
 
@@ -42,9 +41,8 @@ namespace GradAppAPI.Infrastructure.Data
                 return null;
 
             return _dbContext.Companies
-                .Include(c => c.Users)
-                .Include(c => c.VehicleFleet)
-                .Include(c => c.ResourcesTypes)
+                .Include(c => c.Tickets)
+                .Include(c => c.Items)
                 .FirstOrDefault(c => c.Id == id);
         }
 
@@ -52,8 +50,8 @@ namespace GradAppAPI.Infrastructure.Data
         {
             Company company = _dbContext.Companies.FirstOrDefault(c => c.Id == newCompany.Id);
 
-            //if (company == null)
-            //    return null;
+            if (company != null)
+               return null;
 
             _dbContext.Companies.Add(newCompany);
             _dbContext.SaveChanges();

@@ -14,9 +14,9 @@ namespace GradAppAPI.Core.Services
             _resourceTypeRepo = resourceTypeRepository;
         }
 
-        public IEnumerable<ResourceType> GetAll(int companyId)
+        public IEnumerable<ResourceType> GetAll()
         {
-            IEnumerable<ResourceType> types = _resourceTypeRepo.GetAll(companyId);
+            IEnumerable<ResourceType> types = _resourceTypeRepo.GetAll();
 
             if (types == null)
             {

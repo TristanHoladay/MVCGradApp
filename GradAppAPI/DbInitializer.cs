@@ -101,7 +101,6 @@ namespace GradAppAPI
             {
                 Id = 1,
                 Name = "Blue Layer IT",
-                Type = "Managed Services Provider",
                 Status = "Active"
             };
 
@@ -143,20 +142,18 @@ namespace GradAppAPI
 
         public void AddTestResourceTypes()
         {
-            if (_resourceTypeRepo.GetAll(1).Count() > 0) return;
+            if (_resourceTypeRepo.GetAll().Count() > 0) return;
 
             ResourceType testType1 = new ResourceType
             {
                 Id = 1,
-                Name = "Cable",
-                CompanyId = 1,
+                Name = "Cable"
             };
 
             ResourceType testType2 = new ResourceType
             {
                 Id = 2,
-                Name = "Ports",
-                CompanyId = 1,
+                Name = "Ports"
             };
 
             _resourceTypeRepo.Add(testType1);

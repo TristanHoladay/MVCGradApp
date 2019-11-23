@@ -14,10 +14,6 @@ namespace GradAppAPI.APIModels
             {
                 Id = rt.Id,
                 Name = rt.Name,
-                CompanyId = rt.CompanyId,
-                CompanyName = rt.Company != null
-                    ? rt.Company.Name
-                    : null 
             };
         }
 
@@ -27,7 +23,6 @@ namespace GradAppAPI.APIModels
             {
                 Id = rtModel.Id,
                 Name = rtModel.Name,
-                CompanyId = rtModel.CompanyId
             };
         }
 

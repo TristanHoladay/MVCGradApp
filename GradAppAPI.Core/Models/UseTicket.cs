@@ -26,10 +26,8 @@ namespace GradAppAPI.Core.Models
         //Company the UseTicket is attached to
         public int companyId { get; set; }
         public Company Company { get; set; }
-        
 
         //Item that was used 
-        public int itemId { get; set; }
-        public Item Item { get; set; }
+        public IEnumerable<Item> UsedItems { get; set; }
     }
 }

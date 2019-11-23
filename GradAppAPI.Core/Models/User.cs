@@ -20,15 +20,13 @@ namespace GradAppAPI.Core.Models
                return FirstName + " " + LastName;
             }
         }
+
+        public Boolean AdminRole { get; set; }
         public string JobDescription { get; set; }
 
 
         public IEnumerable<UseTicket> Tickets { get; set; }
 
-       // public int currentVehicleId { get; set; }
-       //public Vehicle CurrentVehicle { get; set; }
-
-        //History of Vehicles used (?)
-        //public IEnumerable<Vehicle> VehiclesUsed { get; set; }
+       public IEnumerable<UserVehicles> VehicleAccess { get; set; }
     }
 }

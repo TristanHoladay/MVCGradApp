@@ -23,11 +23,13 @@ namespace GradAppAPI.Controllers
     {
 
         private readonly UserManager<User> _userManager;
+        private readonly RoleManager<User> _roleManager;
         private readonly IConfiguration _config;
 
-        public AuthController(UserManager<User> userManager, IConfiguration configuration)
+        public AuthController(UserManager<User> userManager, RoleManager<User> roleManager ,IConfiguration configuration)
         {
             _userManager = userManager;
+            _roleManager = roleManager;
             _config = configuration;
         }
 
@@ -43,11 +45,15 @@ namespace GradAppAPI.Controllers
                 Email = registration.Email,
                 FirstName = registration.FirstName,
                 LastName = registration.LastName,
-                //CompanyId = registration.CompanyId
+                AdminRole = registration.AdminRole
             };
 
             try
             {
+                if(newUser.AdminRole)
+                {
+                   await _userManager.AddToRoleAsync(newUser, "Admin");
+                }
                 var result = await _userManager.CreateAsync(newUser, registration.Password);
                 if (result.Succeeded)
                 {

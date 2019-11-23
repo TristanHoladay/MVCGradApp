@@ -7,7 +7,7 @@ namespace GradAppAPI.Core.Services
 {
     public interface IResourceTypeService
     {
-        IEnumerable<ResourceType> GetAll(int companyId);
+        IEnumerable<ResourceType> GetAll();
 
         ResourceType Get(int id);
 
