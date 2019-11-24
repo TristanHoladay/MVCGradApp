@@ -21,7 +21,7 @@ namespace GradAppAPI.Core.Models
             }
         }
 
-        public Boolean AdminRole { get; set; }
+        public bool AdminRole { get; set; }
         public string JobDescription { get; set; }
 
 

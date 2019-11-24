@@ -18,18 +18,14 @@ namespace GradAppAPI.Infrastructure.Data
         }
 
         //Get All Vehicles
-        public IEnumerable<Vehicle> GetAll(int companyId)
+        public IEnumerable<Vehicle> GetAll()
         {
-            IEnumerable<Vehicle> vehicleList = _dbContext.Vehicles.Where(v => v.CompanyId == companyId).ToList();
+            IEnumerable<Vehicle> vehicleList = _dbContext.Vehicles.ToList();
 
             if (vehicleList == null)
                 return null;
 
-            return _dbContext.Vehicles
-                .Include(v => v.currentUser)
-                .Include(v => v.Company)
-                .Where(v => v.CompanyId == companyId)
-                .ToList();
+            return _dbContext.Vehicles.ToList();
         }
 
         public Vehicle Get(int id)
@@ -40,8 +36,6 @@ namespace GradAppAPI.Infrastructure.Data
                 return null;
 
             return _dbContext.Vehicles
-                .Include(v => v.currentUser)
-                .Include(v => v.Company)
                 .FirstOrDefault(v => v.Id == id);
         }
 

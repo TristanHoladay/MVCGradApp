@@ -14,8 +14,7 @@ namespace GradAppAPI.APIModels
             {
                 Id = company.Id,
                 Name = company.Name,
-                Type = company.Type,
-                Status = company.Status,
+                Status = company.Status
             };
         }
 
@@ -25,8 +24,7 @@ namespace GradAppAPI.APIModels
             {
                 Id = companyApiModel.Id,
                 Name = companyApiModel.Name,
-                Type = companyApiModel.Type,
-                Status = companyApiModel.Status,
+                Status = companyApiModel.Status
             };
         }
 

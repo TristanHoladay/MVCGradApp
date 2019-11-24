@@ -13,9 +13,5 @@ namespace GradAppAPI.Core.Models
         public string Name { get; set; }
 
         public IEnumerable<Item> Resources { get; set; }
-
-        //[Required]
-        //public int CompanyId { get; set; }
-        //public Company Company { get; set; }
     }
 }

@@ -18,14 +18,6 @@ namespace GradAppAPI.APIModels
                 Status = vehicle.Status,
                 LicensePlate = vehicle.LicensePlate,
                 Notes = vehicle.Notes,
-                CompanyId = vehicle.CompanyId,
-                CompanyName = vehicle.Company != null
-                    ? vehicle.Company.Name
-                    : null,
-                currentUserId = vehicle.currentUserId,
-                currentUserName = vehicle.currentUser != null
-                    ? vehicle.currentUser.FullName
-                    : null
             };
         }
 
@@ -38,9 +30,7 @@ namespace GradAppAPI.APIModels
                 Model = vehicleModel.Model,
                 LicensePlate = vehicleModel.LicensePlate,
                 Status = vehicleModel.Status,
-                Notes = vehicleModel.Notes,
-                CompanyId = vehicleModel.CompanyId,
-                currentUserId = vehicleModel.currentUserId
+                Notes = vehicleModel.Notes
             };
         }
 

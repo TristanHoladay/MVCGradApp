@@ -20,6 +20,7 @@ namespace GradAppAPI.Core.Models
 
         public string Status { get; set; }
         public string Notes { get; set; }
+        public bool CheckedOut { get; set; }
 
         public IEnumerable<Item> Resources { get; set; }
 

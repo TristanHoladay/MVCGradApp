@@ -28,11 +28,11 @@ namespace GradAppAPI.Controllers
         // GET: api/companies/companyId/vehicles
         [Authorize(Roles = "Super Admin, Admin, User")]
         [HttpGet("/api/companies/{companyId}/vehicles")]
-        public IActionResult GetAll(int companyId)
+        public IActionResult GetAll()
         {
             try
             {
-                return Ok(_vehicleService.GetAll(companyId).ToApiModels());
+                return Ok(_vehicleService.GetAll().ToApiModels());
             }   
             catch(Exception ex)
             {

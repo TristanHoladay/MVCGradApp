@@ -110,7 +110,7 @@ namespace GradAppAPI
 
         public void AddTestVehicles()
         {
-            if (_vehicleRepo.GetAll(1).Count() > 0) return;
+            if (_vehicleRepo.GetAll().Count() > 0) return;
 
             Vehicle testVehicle1 = new Vehicle
             {
@@ -119,9 +119,7 @@ namespace GradAppAPI
                 Model = "Ford Focus",
                 LicensePlate = "JF3W2-98L",
                 Status = "In Use",
-                Notes = "ojasodjfowef ojaweofja woeifjo weofjoajoweofj aewofj",
-                CompanyId = 1,
-                currentUserId = 1,
+                Notes = "ojasodjfowef ojaweofja woeifjo weofjoajoweofj aewofj"
             };
 
             Vehicle testVehicle2 = new Vehicle
@@ -131,9 +129,7 @@ namespace GradAppAPI
                 Model = "Ford Explorer",
                 LicensePlate = "KWD2-777",
                 Status = "Not In Use",
-                Notes = "ojasodjfowef ojaweofja woeifjo weofjoajoweofj aewofj",
-                CompanyId = 1,
-                currentUserId = 2,
+                Notes = "ojasodjfowef ojaweofja woeifjo weofjoajoweofj aewofj"
             };
 
             _vehicleRepo.Add(testVehicle1);

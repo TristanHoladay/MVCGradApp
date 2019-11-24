@@ -8,11 +8,14 @@ namespace GradAppAPI.Core.Models
     {
         public int Id { get; set; }
 
-        public int UserId { get; set; }
+        //public int userId { get; set; }
         public User User { get; set; }
 
         public int ResourceTypeId { get; set; }
         public ResourceType ResourceType { get; set; }
+
+        public int companyId { get; set; }
+        public Company Company { get; set; }
 
         public string Details { get; set; }
         public DateTime Date { get; set; }

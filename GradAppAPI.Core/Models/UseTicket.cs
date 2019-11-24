@@ -4,11 +4,12 @@ using System.Text;
 
 namespace GradAppAPI.Core.Models
 {
-    public class UseTicket
+    public class UseTicket : IEntity<int>
     {
         public int Id { get; set; }
 
-        //Needs a common number based off the ID? 
+        //manage from the controller...?
+        public int TicketNumber { get; set; }
 
         //Ticket Number for ConnectWise Ticket
         public int TISNumber { get; set; }
@@ -20,7 +21,7 @@ namespace GradAppAPI.Core.Models
         public string Notes { get; set; }
 
         //User who creates the UseTicket
-        public int userId { get; set; }
+        //public int userId { get; set; }
         public User User { get; set; }
 
         //Company the UseTicket is attached to

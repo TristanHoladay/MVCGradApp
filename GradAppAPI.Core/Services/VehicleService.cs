@@ -15,9 +15,9 @@ namespace GradAppAPI.Core.Services
         }
 
         //GetAll
-        public IEnumerable<Vehicle> GetAll(int companyId)
+        public IEnumerable<Vehicle> GetAll()
         {
-            IEnumerable<Vehicle> vehicles = _vehicleRepo.GetAll(companyId);
+            IEnumerable<Vehicle> vehicles = _vehicleRepo.GetAll();
 
             if(vehicles == null)
             {

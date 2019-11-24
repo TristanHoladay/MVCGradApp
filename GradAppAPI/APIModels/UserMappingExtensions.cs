@@ -16,14 +16,8 @@ namespace GradAppAPI.APIModels
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 Email = user.Email,
-                //CompanyId = user.CompanyId,
-                //CompanyName = user.Company != null
-                //    ? user.Company.Name
-                //    : null,
-                //currentVehicleId = user.currentVehicleId,
-                //currentVehicleName = user.CurrentVehicle != null
-                //    ? user.CurrentVehicle.Name
-                //    : null                
+                AdminRole = user.AdminRole,
+                JobDescription = user.JobDescription  
             };
         }
 
@@ -35,6 +29,8 @@ namespace GradAppAPI.APIModels
                 FirstName = userModel.FirstName,
                 LastName = userModel.LastName,
                 Email = userModel.Email,
+                JobDescription = userModel.JobDescription,
+                AdminRole = userModel.AdminRole
             };
         }
 

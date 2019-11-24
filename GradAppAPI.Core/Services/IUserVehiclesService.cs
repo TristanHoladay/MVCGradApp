@@ -9,7 +9,7 @@ namespace GradAppAPI.Core.Services
     {
         IEnumerable<UserVehicles> GetAllByUser(int userId);
 
-        UserVehicles GetAllByVehicle(int vehicleId);
+        IEnumerable<UserVehicles> GetAllByVehicle(int vehicleId);
 
         UserVehicles Add(UserVehicles newUserVechicles);
 
