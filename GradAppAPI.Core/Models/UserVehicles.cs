@@ -12,6 +12,6 @@ namespace GradAppAPI.Core.Models
         public User User { get; set; }
 
         public int VehicleId { get; set; }
-        public Vehicle Vechile { get; set; }
+        public Vehicle Vehicle { get; set; }
     }
 }

@@ -27,6 +27,8 @@ namespace GradAppAPI.Core.Models
 
         public IEnumerable<UseTicket> Tickets { get; set; }
 
+        public IEnumerable<InventoryRequest> Requests { get; set; }
+
        public IEnumerable<UserVehicles> VehicleAccess { get; set; }
     }
 }
