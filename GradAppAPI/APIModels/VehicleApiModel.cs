@@ -14,11 +14,5 @@ namespace GradAppAPI.APIModels
         public string Status { get; set; }
         public string Notes { get; set; }
 
-        public int CompanyId { get; set; }
-        public string CompanyName { get; set; }
-
-        public int currentUserId { get; set; }
-        public string currentUserName { get; set; }
-
     }
 }

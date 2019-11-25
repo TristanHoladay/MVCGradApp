@@ -9,6 +9,7 @@ namespace GradAppAPI.Core.Models
         public int Id { get; set; }
 
         //public int userId { get; set; }
+        public int userId { get; set; }
         public User User { get; set; }
 
         public int ResourceTypeId { get; set; }

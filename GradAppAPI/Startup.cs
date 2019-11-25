@@ -79,12 +79,24 @@ namespace GradAppAPI
             //Repositories and Services
             services.AddScoped<IVehicleService, VehicleService>();
             services.AddScoped<IVehicleRepository, VehicleRepository>();
+
             services.AddScoped<IItemService, ItemService>();
             services.AddScoped<IItemRepository, ItemRepository>();
+
             services.AddScoped<ICompanyService, CompanyService>();
             services.AddScoped<ICompanyRepository, CompanyRepository>();
+
             services.AddScoped<IResourceTypeRepository, ResourceTypeRepository>();
             services.AddScoped<IResourceTypeService, ResourceTypeService>();
+
+            services.AddScoped<IUserVehiclesRepository, UserVehiclesRepository>();
+            services.AddScoped<IUserVehiclesService, UserVehiclesService>();
+
+            services.AddScoped<IUseTicketRepository, UseTicketsRepository>();
+            services.AddScoped<IUseTicketService, UseTicketService>();
+
+            services.AddScoped<IInventoryRequestRepository, InventoryRequestRepository>();
+            services.AddScoped<IInventoryRequestService, InventoryRequestService>();
 
         }
 
