@@ -7,7 +7,7 @@ namespace GradAppAPI.Core.Services
 {
     public interface IUserVehiclesRepository
     {
-        IEnumerable<UserVehicles> GetAllByUser(int userId);
+        IEnumerable<UserVehicles> GetAllByUser(string userId);
 
         IEnumerable<UserVehicles> GetAllByVehicle(int vehicleId);
 
@@ -15,6 +15,6 @@ namespace GradAppAPI.Core.Services
 
         UserVehicles Update(UserVehicles updatedUserVehicles);
 
-        Boolean Delete(int userId, int vehicleId);
+        Boolean Delete(string userId, int vehicleId);
     }
 }

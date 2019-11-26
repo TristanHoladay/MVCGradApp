@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace GradAppAPI.Infrastructure.Migrations
 {
-    public partial class intial : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -212,25 +212,24 @@ namespace GradAppAPI.Infrastructure.Migrations
                     TISNumber = table.Column<int>(nullable: false),
                     Date = table.Column<DateTime>(nullable: false),
                     Notes = table.Column<string>(nullable: true),
-                    userId = table.Column<int>(nullable: false),
-                    UserId = table.Column<string>(nullable: true),
+                    userId = table.Column<string>(nullable: true),
                     companyId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_UseTickets", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_UseTickets_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
                         name: "FK_UseTickets_Companies_companyId",
                         column: x => x.companyId,
                         principalTable: "Companies",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_UseTickets_AspNetUsers_userId",
+                        column: x => x.userId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -239,8 +238,7 @@ namespace GradAppAPI.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    userId = table.Column<int>(nullable: false),
-                    UserId = table.Column<string>(nullable: true),
+                    userId = table.Column<string>(nullable: true),
                     ResourceTypeId = table.Column<int>(nullable: false),
                     companyId = table.Column<int>(nullable: false),
                     Details = table.Column<string>(nullable: true),
@@ -257,17 +255,17 @@ namespace GradAppAPI.Infrastructure.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_InventoryRequests_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
                         name: "FK_InventoryRequests_Companies_companyId",
                         column: x => x.companyId,
                         principalTable: "Companies",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_InventoryRequests_AspNetUsers_userId",
+                        column: x => x.userId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -276,16 +274,15 @@ namespace GradAppAPI.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    userId = table.Column<int>(nullable: false),
-                    UserId = table.Column<string>(nullable: true),
+                    userId = table.Column<string>(nullable: true),
                     vehicleId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_UserVehicles", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_UserVehicles_AspNetUsers_UserId",
-                        column: x => x.UserId,
+                        name: "FK_UserVehicles_AspNetUsers_userId",
+                        column: x => x.userId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -386,14 +383,14 @@ namespace GradAppAPI.Infrastructure.Migrations
                 column: "ResourceTypeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_InventoryRequests_UserId",
-                table: "InventoryRequests",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_InventoryRequests_companyId",
                 table: "InventoryRequests",
                 column: "companyId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_InventoryRequests_userId",
+                table: "InventoryRequests",
+                column: "userId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Items_ResourceTypeId",
@@ -416,9 +413,9 @@ namespace GradAppAPI.Infrastructure.Migrations
                 column: "companyId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserVehicles_UserId",
+                name: "IX_UserVehicles_userId",
                 table: "UserVehicles",
-                column: "UserId");
+                column: "userId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserVehicles_vehicleId",
@@ -426,14 +423,14 @@ namespace GradAppAPI.Infrastructure.Migrations
                 column: "vehicleId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UseTickets_UserId",
-                table: "UseTickets",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_UseTickets_companyId",
                 table: "UseTickets",
                 column: "companyId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UseTickets_userId",
+                table: "UseTickets",
+                column: "userId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -475,10 +472,10 @@ namespace GradAppAPI.Infrastructure.Migrations
                 name: "Vehicles");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
+                name: "Companies");
 
             migrationBuilder.DropTable(
-                name: "Companies");
+                name: "AspNetUsers");
         }
     }
 }

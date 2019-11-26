@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GradAppAPI.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20191125012307_intial")]
-    partial class intial
+    [Migration("20191126002009_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -46,19 +46,17 @@ namespace GradAppAPI.Infrastructure.Migrations
 
                     b.Property<int>("ResourceTypeId");
 
-                    b.Property<string>("UserId");
-
                     b.Property<int>("companyId");
 
-                    b.Property<int>("userId");
+                    b.Property<string>("userId");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ResourceTypeId");
 
-                    b.HasIndex("UserId");
-
                     b.HasIndex("companyId");
+
+                    b.HasIndex("userId");
 
                     b.ToTable("InventoryRequests");
                 });
@@ -129,17 +127,15 @@ namespace GradAppAPI.Infrastructure.Migrations
 
                     b.Property<int>("TicketNumber");
 
-                    b.Property<string>("UserId");
-
                     b.Property<int>("companyId");
 
-                    b.Property<int>("userId");
+                    b.Property<string>("userId");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
-
                     b.HasIndex("companyId");
+
+                    b.HasIndex("userId");
 
                     b.ToTable("UseTickets");
                 });
@@ -149,15 +145,13 @@ namespace GradAppAPI.Infrastructure.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("UserId");
-
-                    b.Property<int>("userId");
+                    b.Property<string>("userId");
 
                     b.Property<int>("vehicleId");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("userId");
 
                     b.HasIndex("vehicleId");
 
@@ -375,14 +369,14 @@ namespace GradAppAPI.Infrastructure.Migrations
                         .HasForeignKey("ResourceTypeId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("GradAppAPI.Core.Models.User", "User")
-                        .WithMany("Requests")
-                        .HasForeignKey("UserId");
-
                     b.HasOne("GradAppAPI.Core.Models.Company", "Company")
                         .WithMany("Requests")
                         .HasForeignKey("companyId")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("GradAppAPI.Core.Models.User", "User")
+                        .WithMany("Requests")
+                        .HasForeignKey("userId");
                 });
 
             modelBuilder.Entity("GradAppAPI.Core.Models.Item", b =>
@@ -408,21 +402,21 @@ namespace GradAppAPI.Infrastructure.Migrations
 
             modelBuilder.Entity("GradAppAPI.Core.Models.UseTicket", b =>
                 {
-                    b.HasOne("GradAppAPI.Core.Models.User", "User")
-                        .WithMany("Tickets")
-                        .HasForeignKey("UserId");
-
                     b.HasOne("GradAppAPI.Core.Models.Company", "Company")
                         .WithMany("Tickets")
                         .HasForeignKey("companyId")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("GradAppAPI.Core.Models.User", "User")
+                        .WithMany("Tickets")
+                        .HasForeignKey("userId");
                 });
 
             modelBuilder.Entity("GradAppAPI.Core.Models.UserVehicles", b =>
                 {
                     b.HasOne("GradAppAPI.Core.Models.User", "User")
                         .WithMany("VehicleAccess")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("userId");
 
                     b.HasOne("GradAppAPI.Core.Models.Vehicle", "Vehicle")
                         .WithMany("UserAccess")

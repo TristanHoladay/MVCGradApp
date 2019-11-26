@@ -54,18 +54,17 @@ namespace GradAppAPI
                     Email = "brian@bluelayerit.com",
                     FirstName = "Brian",
                     LastName = "Ketchum",
-                    CompanyId = 1
                 }
             };
 
             foreach (var user in testUsers)
             {
-                CreateUser(user.Email, user.FirstName, user.LastName, user.CompanyId);
+                CreateUser(user.Email, user.FirstName, user.LastName);
             }
 
         }
 
-        private User CreateUser(string email, string firstName, string lastName, int companyId)
+        private User CreateUser(string email, string firstName, string lastName)
         {
             if (_userManager.FindByNameAsync(email).Result == null)
             {
@@ -201,7 +200,7 @@ namespace GradAppAPI
                 var result = _roleManager.CreateAsync(adminRole).Result;
             }
 
-            var user = CreateUser("admin@test.com", "admin", "admin", 1);
+            var user = CreateUser("admin@test.com", "admin", "admin");
             if (user != null)
             {
                 _userManager.AddToRoleAsync(user, "Admin").Wait();

@@ -14,7 +14,7 @@ namespace GradAppAPI.Core.Services
             _userVehiclesRepo = userVehclesRepo;
         }
 
-        public IEnumerable<UserVehicles> GetAllByUser(int userId)
+        public IEnumerable<UserVehicles> GetAllByUser(string userId)
         {
             IEnumerable<UserVehicles> userVehiclesList = _userVehiclesRepo.GetAllByUser(userId);
 
@@ -59,7 +59,7 @@ namespace GradAppAPI.Core.Services
             return newUserVehicles;
         }
 
-        public void Delete(int userId, int vehicleId)
+        public void Delete(string userId, int vehicleId)
         {
             Boolean delUV = _userVehiclesRepo.Delete(userId, vehicleId);
             if (!delUV)
