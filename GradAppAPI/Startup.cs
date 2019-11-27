@@ -126,7 +126,7 @@ namespace GradAppAPI
             });
 
             // TODO: add call to dbInitializer
-            //dbInitializer.Initialize();
+            dbInitializer.Initialize();
         }
     }
 }

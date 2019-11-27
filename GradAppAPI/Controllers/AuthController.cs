@@ -23,23 +23,20 @@ namespace GradAppAPI.Controllers
     {
 
         private readonly UserManager<User> _userManager;
-        private readonly RoleManager<User> _roleManager;
         private readonly IConfiguration _config;
 
-        public AuthController(UserManager<User> userManager, RoleManager<User> roleManager ,IConfiguration configuration)
+        public AuthController(UserManager<User> userManager, IConfiguration configuration)
         {
             _userManager = userManager;
-            _roleManager = roleManager;
             _config = configuration;
         }
 
         //Post api/register
         [AllowAnonymous]
         [HttpPost("register")]
-        [EnableCors("AllowOrigin")]
         public async Task<IActionResult> Register([FromBody]RegistrationModel registration)
         {
-            var newUser = new User
+            User newUser = new User
             {
                 UserName = registration.Email,
                 Email = registration.Email,
@@ -50,11 +47,12 @@ namespace GradAppAPI.Controllers
 
             try
             {
-                if(newUser.AdminRole)
-                {
-                   await _userManager.AddToRoleAsync(newUser, "Admin");
-                }
+                
                 var result = await _userManager.CreateAsync(newUser, registration.Password);
+                if (newUser.AdminRole)
+                {
+                    _userManager.AddToRoleAsync(newUser, "Admin").Wait();
+                }
                 if (result.Succeeded)
                 {
                     return Ok(newUser.ToApiModel());
@@ -66,7 +64,7 @@ namespace GradAppAPI.Controllers
             }
             catch (Exception e)
             {
-                var foo = e.Message;
+                ModelState.AddModelError("RegisterError", e.Message);
             }
             // use UserMager to create a new User. Pass in the password so it can be hashed.
             return BadRequest(ModelState);
@@ -80,14 +78,23 @@ namespace GradAppAPI.Controllers
         public async Task<IActionResult> Login([FromBody]LoginModel login)
         {
             IActionResult response = Unauthorized();
-            var user = await AuthenticateUserAsync(login.Email, login.Password);
 
-            if (user != null)
+            try
             {
-                var tokenString = GenerateJSONWebToken(user);
-                response = Ok(new { token = tokenString, email = login.Email });
-            }
+                var user = await AuthenticateUserAsync(login.Email, login.Password);
 
+                if (user != null)
+                {
+                    var tokenString = GenerateJSONWebToken(user);
+                    response = Ok(new { token = tokenString, email = login.Email });
+                }
+            }
+            catch (Exception e)
+            {
+                ModelState.AddModelError("LoginError", e.Message);
+                return BadRequest(ModelState);
+            }
+            
             return response;
         }
 

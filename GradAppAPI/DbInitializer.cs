@@ -34,7 +34,7 @@ namespace GradAppAPI
             AddTestCompanies();
             AddTestVehicles();
             AddTestResourceTypes();
-            AddTestItems();
+            //AddTestItems();
             AddTestUsers();
             AddAdminUser();
         }
@@ -167,7 +167,8 @@ namespace GradAppAPI
                 Amount = 30,
                 Cost = 1,
                 TypeId = 1,
-                VehicleId = 1
+                VehicleId = 1,
+                companyId = 1
             };
 
             Item testItem2 = new Item
@@ -178,7 +179,8 @@ namespace GradAppAPI
                 Amount = 22,
                 Cost = 5,
                 TypeId = 2,
-                VehicleId = 2
+                VehicleId = 2,
+                companyId = 1
             };
 
             _itemRepo.Add(testItem1);
