@@ -41,7 +41,7 @@ namespace GradAppAPI.Infrastructure.Data
 
         public Vehicle Add(Vehicle newVehicle)
         {
-            Vehicle vehicle = _dbContext.Vehicles.FirstOrDefault(v => v.LicensePlate == newVehicle.LicensePlate);
+            Vehicle vehicle = _dbContext.Vehicles.FirstOrDefault(v => v.Id == newVehicle.Id);
 
             if (vehicle != null)
                 return null;

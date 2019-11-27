@@ -12,7 +12,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GradAppAPI.Controllers
 {
-    [Authorize]
+    //[Authorize]
+    [AllowAnonymous]
     [Route("api/[controller]")]
     public class VehiclesController : Controller
     {
@@ -26,8 +27,9 @@ namespace GradAppAPI.Controllers
 
 
         // GET: api/companies/companyId/vehicles
-        [Authorize(Roles = "Super Admin, Admin, User")]
-        [HttpGet("/api/companies/{companyId}/vehicles")]
+        //[Authorize(Roles = "Super Admin, Admin, User")]
+        [AllowAnonymous]
+        [HttpGet]
         public IActionResult GetAll()
         {
             try
@@ -42,7 +44,8 @@ namespace GradAppAPI.Controllers
         }
 
         // GET api/vehicles/5
-        [Authorize(Roles = "Super Admin, Admin, User")]
+        //[Authorize(Roles = "Super Admin, Admin, User")]
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
@@ -58,7 +61,8 @@ namespace GradAppAPI.Controllers
         }
 
         // POST api/vehicles
-        [Authorize(Roles = "Super Admin, Admin, User")]
+        //[Authorize(Roles = "Super Admin, Admin, User")]
+        [AllowAnonymous]
         [HttpPost]
         public IActionResult Post([FromBody]Vehicle newVehicle)
         {
@@ -74,7 +78,8 @@ namespace GradAppAPI.Controllers
         }
 
         // PUT api/vehicles/5
-        [Authorize(Roles = "Super Admin, Admin, User")]
+       // [Authorize(Roles = "Super Admin, Admin, User")]
+       [AllowAnonymous]
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody]Vehicle updatedVehicle)
         {
@@ -91,7 +96,8 @@ namespace GradAppAPI.Controllers
         }
 
         // DELETE api/vehicles/5
-        [Authorize(Roles = "Super Admin, Admin")]
+        //[Authorize(Roles = "Super Admin, Admin")]
+        [AllowAnonymous]
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {

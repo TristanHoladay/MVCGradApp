@@ -52,7 +52,7 @@ namespace GradAppAPI.Core.Services
 
         public Company Update(Company updatedCompany)
         {
-            Company company = _companyRepo.Add(updatedCompany);
+            Company company = _companyRepo.Update(updatedCompany);
 
             if(company == null)
             {

@@ -12,7 +12,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GradAppAPI.Controllers
 {
-    [Authorize]
+    //[Authorize]
+    [AllowAnonymous]
     [Route("api/[controller]")]
     public class CompaniesController : Controller
     {
@@ -26,7 +27,8 @@ namespace GradAppAPI.Controllers
 
 
         // GET: api/companies
-        [Authorize(Roles = "Super Admin")]
+        //[Authorize(Roles = "Admin")]
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult GetAll()
         {
@@ -41,7 +43,7 @@ namespace GradAppAPI.Controllers
             }
         }
 
-        [Authorize(Roles = "Super Admin, Admin")]
+        //[Authorize(Roles = "Super Admin, Admin")]
         // GET api/companies/5
         [HttpGet("{id}")]
         public IActionResult Get(int id)
@@ -58,7 +60,7 @@ namespace GradAppAPI.Controllers
         }
 
         // POST api/companies
-        [Authorize(Roles = "Super Admin")]
+        //[Authorize(Roles = "Super Admin")]
         [HttpPost]
         public IActionResult Post([FromBody]Company newCompany)
         {
@@ -74,7 +76,7 @@ namespace GradAppAPI.Controllers
         }
 
         // PUT api/companies/5
-        [Authorize(Roles = "Super Admin")]
+        //[Authorize(Roles = "Super Admin")]
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody]Company updatedCompany)
         {
@@ -90,7 +92,7 @@ namespace GradAppAPI.Controllers
         }
 
         // DELETE api/<controller>/5
-        [Authorize(Roles = "Super Admin")]
+        //[Authorize(Roles = "Super Admin")]
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
