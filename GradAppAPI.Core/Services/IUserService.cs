@@ -11,5 +11,7 @@ namespace GradAppAPI.Core.Services
         ClaimsPrincipal User { get; }
 
         string CurrentUserId { get; }
+
+        List<User> GetUsersAsync();
     }
 }
