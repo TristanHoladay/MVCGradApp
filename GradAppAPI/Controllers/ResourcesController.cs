@@ -33,7 +33,7 @@ namespace GradAppAPI.Controllers
         {
             try
             {
-                var companyItems = _itemService.GetAll(companyId);
+                IEnumerable<Item> companyItems = _itemService.GetAll(companyId);
                 return Ok(companyItems.ToApiModels());
             }
             catch(Exception ex)
@@ -67,7 +67,7 @@ namespace GradAppAPI.Controllers
             try
             {
                 var item = _itemService.Add(newItem);
-                return Ok(item);
+                return Ok(item.ToApiModel());
             }
             catch(Exception ex)
             {

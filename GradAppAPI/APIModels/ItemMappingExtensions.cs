@@ -19,6 +19,10 @@ namespace GradAppAPI.APIModels
                 Cost = item.Cost,
                 TypeId = item.TypeId,
                 ResourceTypeName = item.ResourceType.Name,
+                companyId = item.companyId,
+                Company = item.Company != null
+                    ? item.Company.Name
+                    : null,
                 VehicleId = item.VehicleId,
                 VehicleName = item.Vehicle != null
                     ? item.Vehicle.Name

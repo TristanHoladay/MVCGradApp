@@ -28,6 +28,7 @@ namespace GradAppAPI.Infrastructure.Data
             return _dbContext.Items
                 .Include(i => i.ResourceType)
                 .Include(i => i.Vehicle)
+                .Include(i => i.Company)
                 .Where(i => i.companyId == CompanyId)
                 .ToList();
         }
