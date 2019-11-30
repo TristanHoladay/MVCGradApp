@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace GradAppAPI.Infrastructure.Migrations
 {
-    public partial class initial : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -208,19 +208,18 @@ namespace GradAppAPI.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    TicketNumber = table.Column<int>(nullable: false),
                     TISNumber = table.Column<int>(nullable: false),
                     Date = table.Column<DateTime>(nullable: false),
                     Notes = table.Column<string>(nullable: true),
                     userId = table.Column<string>(nullable: true),
-                    companyId = table.Column<int>(nullable: false)
+                    CompanyId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_UseTickets", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_UseTickets_Companies_companyId",
-                        column: x => x.companyId,
+                        name: "FK_UseTickets_Companies_CompanyId",
+                        column: x => x.CompanyId,
                         principalTable: "Companies",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -240,7 +239,7 @@ namespace GradAppAPI.Infrastructure.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     userId = table.Column<string>(nullable: true),
                     ResourceTypeId = table.Column<int>(nullable: false),
-                    companyId = table.Column<int>(nullable: false),
+                    CompanyId = table.Column<int>(nullable: false),
                     Details = table.Column<string>(nullable: true),
                     Date = table.Column<DateTime>(nullable: false),
                     Complete = table.Column<bool>(nullable: false)
@@ -249,15 +248,15 @@ namespace GradAppAPI.Infrastructure.Migrations
                 {
                     table.PrimaryKey("PK_InventoryRequests", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_InventoryRequests_ResourceTypes_ResourceTypeId",
-                        column: x => x.ResourceTypeId,
-                        principalTable: "ResourceTypes",
+                        name: "FK_InventoryRequests_Companies_CompanyId",
+                        column: x => x.CompanyId,
+                        principalTable: "Companies",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_InventoryRequests_Companies_companyId",
-                        column: x => x.companyId,
-                        principalTable: "Companies",
+                        name: "FK_InventoryRequests_ResourceTypes_ResourceTypeId",
+                        column: x => x.ResourceTypeId,
+                        principalTable: "ResourceTypes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -275,23 +274,23 @@ namespace GradAppAPI.Infrastructure.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     userId = table.Column<string>(nullable: true),
-                    vehicleId = table.Column<int>(nullable: false)
+                    VehicleId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_UserVehicles", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_UserVehicles_Vehicles_VehicleId",
+                        column: x => x.VehicleId,
+                        principalTable: "Vehicles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_UserVehicles_AspNetUsers_userId",
                         column: x => x.userId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_UserVehicles_Vehicles_vehicleId",
-                        column: x => x.vehicleId,
-                        principalTable: "Vehicles",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -305,21 +304,26 @@ namespace GradAppAPI.Infrastructure.Migrations
                     Amount = table.Column<int>(nullable: false),
                     Cost = table.Column<int>(nullable: false),
                     StorageLocation = table.Column<string>(nullable: false),
-                    TypeId = table.Column<int>(nullable: false),
-                    ResourceTypeId = table.Column<int>(nullable: true),
-                    companyId = table.Column<int>(nullable: false),
-                    VehicleId = table.Column<int>(nullable: false),
+                    ResourceTypeId = table.Column<int>(nullable: false),
+                    CompanyId = table.Column<int>(nullable: false),
+                    VehicleId = table.Column<int>(nullable: true),
                     UseTicketId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Items", x => x.Id);
                     table.ForeignKey(
+                        name: "FK_Items_Companies_CompanyId",
+                        column: x => x.CompanyId,
+                        principalTable: "Companies",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
                         name: "FK_Items_ResourceTypes_ResourceTypeId",
                         column: x => x.ResourceTypeId,
                         principalTable: "ResourceTypes",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Items_UseTickets_UseTicketId",
                         column: x => x.UseTicketId,
@@ -331,13 +335,7 @@ namespace GradAppAPI.Infrastructure.Migrations
                         column: x => x.VehicleId,
                         principalTable: "Vehicles",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Items_Companies_companyId",
-                        column: x => x.companyId,
-                        principalTable: "Companies",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
@@ -378,19 +376,24 @@ namespace GradAppAPI.Infrastructure.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_InventoryRequests_CompanyId",
+                table: "InventoryRequests",
+                column: "CompanyId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_InventoryRequests_ResourceTypeId",
                 table: "InventoryRequests",
                 column: "ResourceTypeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_InventoryRequests_companyId",
-                table: "InventoryRequests",
-                column: "companyId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_InventoryRequests_userId",
                 table: "InventoryRequests",
                 column: "userId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Items_CompanyId",
+                table: "Items",
+                column: "CompanyId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Items_ResourceTypeId",
@@ -408,9 +411,9 @@ namespace GradAppAPI.Infrastructure.Migrations
                 column: "VehicleId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Items_companyId",
-                table: "Items",
-                column: "companyId");
+                name: "IX_UserVehicles_VehicleId",
+                table: "UserVehicles",
+                column: "VehicleId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserVehicles_userId",
@@ -418,14 +421,9 @@ namespace GradAppAPI.Infrastructure.Migrations
                 column: "userId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserVehicles_vehicleId",
-                table: "UserVehicles",
-                column: "vehicleId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_UseTickets_companyId",
+                name: "IX_UseTickets_CompanyId",
                 table: "UseTickets",
-                column: "companyId");
+                column: "CompanyId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UseTickets_userId",

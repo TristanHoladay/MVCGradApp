@@ -17,7 +17,7 @@ namespace GradAppAPI.APIModels
                 User = request.User != null
                     ? request.User.FullName
                     : null,
-                companyId = request.companyId,
+                companyId = request.CompanyId,
                 Company = request.Company != null
                     ? request.Company.Name
                     : null,
@@ -40,7 +40,7 @@ namespace GradAppAPI.APIModels
                 Details = request.Details,
                 Complete = request.Complete,
                 userId = request.userId,
-                companyId = request.companyId,
+                CompanyId = request.companyId,
                 ResourceTypeId = request.ResourceTypeId
             };
         }

@@ -10,8 +10,6 @@ namespace GradAppAPI.APIModels
     {
         public int Id { get; set; }
 
-        public int TicketNumber { get; set; }
-
         public int TISNumber { get; set; }
 
         public DateTime Date { get; set; }

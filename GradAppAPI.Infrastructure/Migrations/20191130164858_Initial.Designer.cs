@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GradAppAPI.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20191126002009_initial")]
-    partial class initial
+    [Migration("20191130164858_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -38,6 +38,8 @@ namespace GradAppAPI.Infrastructure.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<int>("CompanyId");
+
                     b.Property<bool>("Complete");
 
                     b.Property<DateTime>("Date");
@@ -46,15 +48,13 @@ namespace GradAppAPI.Infrastructure.Migrations
 
                     b.Property<int>("ResourceTypeId");
 
-                    b.Property<int>("companyId");
-
                     b.Property<string>("userId");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ResourceTypeId");
+                    b.HasIndex("CompanyId");
 
-                    b.HasIndex("companyId");
+                    b.HasIndex("ResourceTypeId");
 
                     b.HasIndex("userId");
 
@@ -68,6 +68,8 @@ namespace GradAppAPI.Infrastructure.Migrations
 
                     b.Property<int>("Amount");
 
+                    b.Property<int>("CompanyId");
+
                     b.Property<int>("Cost");
 
                     b.Property<string>("Description");
@@ -75,28 +77,24 @@ namespace GradAppAPI.Infrastructure.Migrations
                     b.Property<string>("Name")
                         .IsRequired();
 
-                    b.Property<int?>("ResourceTypeId");
+                    b.Property<int>("ResourceTypeId");
 
                     b.Property<string>("StorageLocation")
                         .IsRequired();
 
-                    b.Property<int>("TypeId");
-
                     b.Property<int?>("UseTicketId");
 
-                    b.Property<int>("VehicleId");
-
-                    b.Property<int>("companyId");
+                    b.Property<int?>("VehicleId");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CompanyId");
 
                     b.HasIndex("ResourceTypeId");
 
                     b.HasIndex("UseTicketId");
 
                     b.HasIndex("VehicleId");
-
-                    b.HasIndex("companyId");
 
                     b.ToTable("Items");
                 });
@@ -119,21 +117,19 @@ namespace GradAppAPI.Infrastructure.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<int>("CompanyId");
+
                     b.Property<DateTime>("Date");
 
                     b.Property<string>("Notes");
 
                     b.Property<int>("TISNumber");
 
-                    b.Property<int>("TicketNumber");
-
-                    b.Property<int>("companyId");
-
                     b.Property<string>("userId");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("companyId");
+                    b.HasIndex("CompanyId");
 
                     b.HasIndex("userId");
 
@@ -145,15 +141,15 @@ namespace GradAppAPI.Infrastructure.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("userId");
+                    b.Property<int>("VehicleId");
 
-                    b.Property<int>("vehicleId");
+                    b.Property<string>("userId");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("userId");
+                    b.HasIndex("VehicleId");
 
-                    b.HasIndex("vehicleId");
+                    b.HasIndex("userId");
 
                     b.ToTable("UserVehicles");
                 });
@@ -364,14 +360,14 @@ namespace GradAppAPI.Infrastructure.Migrations
 
             modelBuilder.Entity("GradAppAPI.Core.Models.InventoryRequest", b =>
                 {
+                    b.HasOne("GradAppAPI.Core.Models.Company", "Company")
+                        .WithMany("Requests")
+                        .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
                     b.HasOne("GradAppAPI.Core.Models.ResourceType", "ResourceType")
                         .WithMany()
                         .HasForeignKey("ResourceTypeId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("GradAppAPI.Core.Models.Company", "Company")
-                        .WithMany("Requests")
-                        .HasForeignKey("companyId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("GradAppAPI.Core.Models.User", "User")
@@ -381,30 +377,30 @@ namespace GradAppAPI.Infrastructure.Migrations
 
             modelBuilder.Entity("GradAppAPI.Core.Models.Item", b =>
                 {
+                    b.HasOne("GradAppAPI.Core.Models.Company", "Company")
+                        .WithMany("Items")
+                        .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
                     b.HasOne("GradAppAPI.Core.Models.ResourceType", "ResourceType")
                         .WithMany("Resources")
-                        .HasForeignKey("ResourceTypeId");
+                        .HasForeignKey("ResourceTypeId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("GradAppAPI.Core.Models.UseTicket")
+                    b.HasOne("GradAppAPI.Core.Models.UseTicket", "UseTicket")
                         .WithMany("UsedItems")
                         .HasForeignKey("UseTicketId");
 
                     b.HasOne("GradAppAPI.Core.Models.Vehicle", "Vehicle")
                         .WithMany("Resources")
-                        .HasForeignKey("VehicleId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("GradAppAPI.Core.Models.Company", "Company")
-                        .WithMany("Items")
-                        .HasForeignKey("companyId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("VehicleId");
                 });
 
             modelBuilder.Entity("GradAppAPI.Core.Models.UseTicket", b =>
                 {
                     b.HasOne("GradAppAPI.Core.Models.Company", "Company")
                         .WithMany("Tickets")
-                        .HasForeignKey("companyId")
+                        .HasForeignKey("CompanyId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("GradAppAPI.Core.Models.User", "User")
@@ -414,14 +410,14 @@ namespace GradAppAPI.Infrastructure.Migrations
 
             modelBuilder.Entity("GradAppAPI.Core.Models.UserVehicles", b =>
                 {
+                    b.HasOne("GradAppAPI.Core.Models.Vehicle", "Vehicle")
+                        .WithMany("UserAccess")
+                        .HasForeignKey("VehicleId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
                     b.HasOne("GradAppAPI.Core.Models.User", "User")
                         .WithMany("VehicleAccess")
                         .HasForeignKey("userId");
-
-                    b.HasOne("GradAppAPI.Core.Models.Vehicle", "Vehicle")
-                        .WithMany("UserAccess")
-                        .HasForeignKey("vehicleId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

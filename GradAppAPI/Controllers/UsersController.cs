@@ -29,7 +29,7 @@ namespace GradAppAPI.Controllers
         {
             try
             {
-                IEnumerable<User> users = _userService.GetUsersAsync();
+                IEnumerable<User> users = _userService.GetUsers();
                 return Ok(users.ToApiModels());
             }
             catch(Exception ex)

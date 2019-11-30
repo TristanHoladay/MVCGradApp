@@ -34,7 +34,7 @@ namespace GradAppAPI
             AddTestCompanies();
             AddTestVehicles();
             AddTestResourceTypes();
-            //AddTestItems();
+            AddTestItems();
             AddTestUsers();
             AddAdminUser();
         }
@@ -42,29 +42,30 @@ namespace GradAppAPI
         public void AddTestUsers()
         {
             var testUsers = new[] {
-                //new
-                //{
-                //    Email = "logan@bluelayerit.com",
-                //    FirstName = "Logan",
-                //    LastName = "Papa",
-                //    CompanyId = 1
-                //},
+                new
+                {
+                   Email = "logan@bluelayerit.com",
+                   FirstName = "Logan",
+                   LastName = "Papa",
+                   AdminRole = false
+                },
                 new
                 {
                     Email = "brian@bluelayerit.com",
                     FirstName = "Brian",
                     LastName = "Ketchum",
+                    AdminRole = false
                 }
             };
 
             foreach (var user in testUsers)
             {
-                CreateUser(user.Email, user.FirstName, user.LastName);
+                CreateUser(user.Email, user.FirstName, user.LastName, user.AdminRole);
             }
 
         }
 
-        private User CreateUser(string email, string firstName, string lastName)
+        private User CreateUser(string email, string firstName, string lastName, bool adminRole)
         {
             if (_userManager.FindByNameAsync(email).Result == null)
             {
@@ -74,8 +75,7 @@ namespace GradAppAPI
                     Email = email,
                     FirstName = firstName,
                     LastName = lastName,
-                    //CompanyId = companyId,
-                    //currentVehicleId = 1
+                    AdminRole = adminRole
                 };
                 // add user
                 try
@@ -164,11 +164,13 @@ namespace GradAppAPI
                 Id = 1,
                 Name = "CAT-5 Cable",
                 Description = "Ethernet Cable for desktops, printers, and servers.",
+                StorageLocation = "Vechicle",
                 Amount = 30,
                 Cost = 1,
                 ResourceTypeId = 1,
                 VehicleId = 1,
-                CompanyId = 1
+                CompanyId = 1,
+                UseTicketId = null
             };
 
             Item testItem2 = new Item
@@ -176,11 +178,12 @@ namespace GradAppAPI
                 Id = 2,
                 Name = "USB 3.0",
                 Description = "USB 3.0 ports for desktops, laptops, printers, and servers.",
+                StorageLocation = "Armory",
                 Amount = 22,
                 Cost = 5,
                 ResourceTypeId = 2,
-                VehicleId = 2,
-                CompanyId = 1
+                CompanyId = 1,
+                UseTicketId = null
             };
 
             _itemRepo.Add(testItem1);
@@ -202,7 +205,7 @@ namespace GradAppAPI
                 var result = _roleManager.CreateAsync(adminRole).Result;
             }
 
-            var user = CreateUser("admin@test.com", "admin", "admin");
+            var user = CreateUser("admin@test.com", "admin", "admin", true);
             if (user != null)
             {
                 _userManager.AddToRoleAsync(user, "Admin").Wait();

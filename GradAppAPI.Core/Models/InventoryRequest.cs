@@ -6,16 +6,16 @@ namespace GradAppAPI.Core.Models
 {
     public class InventoryRequest : IEntity<int>
     {
+        //Id will act as request "number"
         public int Id { get; set; }
 
-        //public int userId { get; set; }
         public string userId { get; set; }
         public User User { get; set; }
 
         public int ResourceTypeId { get; set; }
         public ResourceType ResourceType { get; set; }
 
-        public int companyId { get; set; }
+        public int CompanyId { get; set; }
         public Company Company { get; set; }
 
         public string Details { get; set; }

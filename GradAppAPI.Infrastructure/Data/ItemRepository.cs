@@ -41,8 +41,10 @@ namespace GradAppAPI.Infrastructure.Data
                 return null;
 
             return _dbContext.Items
+                .Include(i => i.Company)
                  .Include(i => i.ResourceType)
                  .Include(i => i.Vehicle)
+                 .Include(i => i.UseTicket)
                  .FirstOrDefault(i => i.Id == id);
         }
 

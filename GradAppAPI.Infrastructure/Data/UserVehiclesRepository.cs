@@ -28,7 +28,7 @@ namespace GradAppAPI.Infrastructure.Data
 
         public IEnumerable<UserVehicles> GetAllByVehicle(int vehiclesId)
         {
-            IEnumerable<UserVehicles> userVehiclesList = _dbContext.UserVehicles.Where(uv => uv.vehicleId == vehiclesId);
+            IEnumerable<UserVehicles> userVehiclesList = _dbContext.UserVehicles.Where(uv => uv.VehicleId == vehiclesId);
 
             if (userVehiclesList == null)
                 return null;
@@ -67,7 +67,7 @@ namespace GradAppAPI.Infrastructure.Data
 
         public Boolean Delete(string usersId, int vehiclesId)
         {
-            UserVehicles delUserVehicles = _dbContext.UserVehicles.FirstOrDefault(uv => uv.userId == usersId && uv.vehicleId == vehiclesId);
+            UserVehicles delUserVehicles = _dbContext.UserVehicles.FirstOrDefault(uv => uv.userId == usersId && uv.VehicleId == vehiclesId);
 
             if (delUserVehicles == null)
                 return false;

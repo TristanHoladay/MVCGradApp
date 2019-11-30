@@ -13,11 +13,10 @@ namespace GradAppAPI.APIModels
             return new UseTicketApiModel
             {
                 Id = useTicket.Id,
-                TicketNumber = useTicket.TicketNumber,
                 TISNumber = useTicket.TISNumber,
                 Date = useTicket.Date,
                 Notes = useTicket.Notes,
-                companyId = useTicket.companyId,
+                companyId = useTicket.CompanyId,
                 Company = useTicket.Company != null
                     ? useTicket.Company.Name
                     : null,
@@ -34,12 +33,11 @@ namespace GradAppAPI.APIModels
             return new UseTicket
             {
                 Id = useTicket.Id,
-                TicketNumber = useTicket.TicketNumber,
                 TISNumber = useTicket.TISNumber,
                 Date = useTicket.Date,
                 Notes = useTicket.Notes,
                 userId = useTicket.userId,
-                companyId = useTicket.companyId
+                CompanyId = useTicket.companyId
             };
         }
 

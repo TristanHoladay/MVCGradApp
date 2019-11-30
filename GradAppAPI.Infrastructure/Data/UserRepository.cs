@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -20,12 +21,9 @@ namespace GradAppAPI.Infrastructure.Data
             _userManager = userManager;
         }
 
-        public async Task<List<User>> GetUsersAsync()
-        {
-            using (_dbContext)
-            {
-                return await _userManager.Users.ToListAsync();
-            }
+        public List<User> GetUsers()
+        { 
+           return _userManager.Users.ToList(); 
         }
     }
 }

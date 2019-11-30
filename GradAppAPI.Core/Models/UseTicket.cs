@@ -6,10 +6,8 @@ namespace GradAppAPI.Core.Models
 {
     public class UseTicket : IEntity<int>
     {
+        //Will act as ticket "number"
         public int Id { get; set; }
-
-        //manage from the controller...?
-        public int TicketNumber { get; set; }
 
         //Ticket Number for ConnectWise Ticket
         public int TISNumber { get; set; }
@@ -25,7 +23,7 @@ namespace GradAppAPI.Core.Models
         public User User { get; set; }
 
         //Company the UseTicket is attached to
-        public int companyId { get; set; }
+        public int CompanyId { get; set; }
         public Company Company { get; set; }
 
         //Item that was used 

@@ -12,8 +12,9 @@ namespace GradAppAPI.APIModels
         public string Description { get; set; }
         public int Amount { get; set; }
         public int Cost { get; set; }
+        public string StorageLocation { get; set; }
 
-        public int companyId { get; set; }
+        public int CompanyId { get; set; }
         public string Company { get; set; }
 
         public int TypeId { get; set; }
@@ -21,5 +22,8 @@ namespace GradAppAPI.APIModels
 
         public int VehicleId { get; set; }
         public string VehicleName { get; set; }
+
+        public int UseTicketId { get; set; }
+        public string UseTicket { get; set; }
     }
 }

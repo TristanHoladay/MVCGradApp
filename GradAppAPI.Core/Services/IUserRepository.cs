@@ -8,6 +8,6 @@ namespace GradAppAPI.Core.Services
 {
     public interface IUserRepository
     {
-        Task<List<User>> GetUsersAsync();
+        List<User> GetUsers();
     }
 }

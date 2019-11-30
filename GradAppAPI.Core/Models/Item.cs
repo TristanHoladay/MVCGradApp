@@ -32,7 +32,10 @@ namespace GradAppAPI.Core.Models
         public int CompanyId { get; set; }
         public Company Company { get; set; }
 
-        public int VehicleId { get; set; }
+        public Nullable<int> VehicleId { get; set; }
         public Vehicle Vehicle { get; set; }
+
+        public Nullable<int> UseTicketId { get; set; }
+        public UseTicket UseTicket { get; set; }
     }
 }

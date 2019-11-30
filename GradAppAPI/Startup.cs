@@ -98,6 +98,9 @@ namespace GradAppAPI
             services.AddScoped<IInventoryRequestRepository, InventoryRequestRepository>();
             services.AddScoped<IInventoryRequestService, InventoryRequestService>();
 
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IUserService, UserService>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -36,9 +36,9 @@ namespace GradAppAPI.Core.Services
             }
         }
 
-        public List<User> GetUsersAsync()
+        public List<User> GetUsers()
         {
-            var users = _userRepo.GetUsersAsync().Result;
+            var users = _userRepo.GetUsers();
 
             if(users == null)
             {

@@ -17,15 +17,20 @@ namespace GradAppAPI.APIModels
                 Description = item.Description,
                 Amount = item.Amount,
                 Cost = item.Cost,
+                StorageLocation = item.StorageLocation,
                 TypeId = item.ResourceTypeId,
                 ResourceTypeName = item.ResourceType.Name,
-                companyId = item.CompanyId,
+                CompanyId = item.CompanyId,
                 Company = item.Company != null
                     ? item.Company.Name
                     : null,
-                VehicleId = item.VehicleId,
+                VehicleId = item.VehicleId ?? item.VehicleId.GetValueOrDefault(),
                 VehicleName = item.Vehicle != null
                     ? item.Vehicle.Name
+                    : null,
+                UseTicketId = item.UseTicketId ?? item.UseTicketId.GetValueOrDefault(),
+                UseTicket = item.UseTicket != null
+                    ? item.UseTicket.Notes
                     : null
             };
         }
@@ -39,8 +44,12 @@ namespace GradAppAPI.APIModels
                 Description = itemModel.Description,
                 Amount = itemModel.Amount,
                 Cost = itemModel.Cost,
+                StorageLocation = itemModel.StorageLocation,
+                CompanyId = itemModel.CompanyId,
                 ResourceTypeId = itemModel.TypeId,
-                VehicleId = itemModel.VehicleId
+                VehicleId = itemModel.VehicleId,
+                UseTicketId = itemModel.UseTicketId
+
             };
         }
 
