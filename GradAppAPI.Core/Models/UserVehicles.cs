@@ -8,7 +8,7 @@ namespace GradAppAPI.Core.Models
     {
         public int Id { get; set; }
 
-        public string userId { get; set; }
+        public string UserId { get; set; }
         public User User { get; set; }
 
         public int VehicleId { get; set; }

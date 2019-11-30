@@ -27,7 +27,6 @@ namespace GradAppAPI.Infrastructure.Data
             return _dbContext.UseTickets
                 .Include(ut => ut.User)
                 .Include(ut => ut.Company)
-                .Include(ut => ut.UsedItems.ToList())
                 .ToList();
         }
 
@@ -41,7 +40,6 @@ namespace GradAppAPI.Infrastructure.Data
             return _dbContext.UseTickets
                 .Include(ut => ut.User)
                 .Include(ut => ut.Company)
-                .Include(ut => ut.UsedItems.ToList())
                 .FirstOrDefault(ut => ut.Id == id);
         }
 

@@ -20,11 +20,10 @@ namespace GradAppAPI.APIModels
                 Company = useTicket.Company != null
                     ? useTicket.Company.Name
                     : null,
-                userId = useTicket.userId,
+                UserId = useTicket.UserId,
                 User = useTicket.User != null
                     ? useTicket.User.FullName
-                    : null,
-                Items = useTicket.UsedItems
+                    : null
             };
         }
 
@@ -36,7 +35,7 @@ namespace GradAppAPI.APIModels
                 TISNumber = useTicket.TISNumber,
                 Date = useTicket.Date,
                 Notes = useTicket.Notes,
-                userId = useTicket.userId,
+                UserId = useTicket.UserId,
                 CompanyId = useTicket.companyId
             };
         }

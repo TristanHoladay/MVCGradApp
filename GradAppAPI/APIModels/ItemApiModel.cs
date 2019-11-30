@@ -17,7 +17,7 @@ namespace GradAppAPI.APIModels
         public int CompanyId { get; set; }
         public string Company { get; set; }
 
-        public int TypeId { get; set; }
+        public int ResourceTypeId { get; set; }
         public string ResourceTypeName { get; set; }
 
         public int VehicleId { get; set; }

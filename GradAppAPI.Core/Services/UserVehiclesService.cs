@@ -59,9 +59,9 @@ namespace GradAppAPI.Core.Services
             return newUserVehicles;
         }
 
-        public void Delete(string userId, int vehicleId)
+        public void Delete(int id)
         {
-            Boolean delUV = _userVehiclesRepo.Delete(userId, vehicleId);
+            Boolean delUV = _userVehiclesRepo.Delete(id);
             if (!delUV)
             {
                 throw new ApplicationException("Could not find user-vehicle relationship to delete.");

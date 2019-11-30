@@ -25,7 +25,9 @@ namespace GradAppAPI.Infrastructure.Data
             if (vehicleList == null)
                 return null;
 
-            return _dbContext.Vehicles.ToList();
+            return _dbContext.Vehicles
+                .Include(v => v.UserAccess)
+                .ToList();
         }
 
         public Vehicle Get(int id)
@@ -36,6 +38,7 @@ namespace GradAppAPI.Infrastructure.Data
                 return null;
 
             return _dbContext.Vehicles
+                .Include(v => v.UserAccess)
                 .FirstOrDefault(v => v.Id == id);
         }
 

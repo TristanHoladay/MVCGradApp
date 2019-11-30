@@ -19,7 +19,7 @@ namespace GradAppAPI.Core.Models
         public string Notes { get; set; }
 
         //User who creates the UseTicket
-        public string userId { get; set; }
+        public string UserId { get; set; }
         public User User { get; set; }
 
         //Company the UseTicket is attached to

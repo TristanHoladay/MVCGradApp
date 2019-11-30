@@ -15,6 +15,6 @@ namespace GradAppAPI.Core.Services
 
         UserVehicles Update(UserVehicles updatedUserVehicles);
 
-        Boolean Delete(string userId, int vehicleId);
+        Boolean Delete(int Id);
     }
 }

@@ -13,7 +13,7 @@ namespace GradAppAPI.APIModels
             return new InventoryRequestApiModel
             {
                 Id = request.Id,
-                userId = request.userId,
+                UserId = request.UserId,
                 User = request.User != null
                     ? request.User.FullName
                     : null,
@@ -39,7 +39,7 @@ namespace GradAppAPI.APIModels
                 Date = request.Date,
                 Details = request.Details,
                 Complete = request.Complete,
-                userId = request.userId,
+                UserId = request.UserId,
                 CompanyId = request.companyId,
                 ResourceTypeId = request.ResourceTypeId
             };

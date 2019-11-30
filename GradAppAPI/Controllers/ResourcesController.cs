@@ -67,7 +67,7 @@ namespace GradAppAPI.Controllers
             try
             {
                 var item = _itemService.Add(newItem);
-                return Ok(item.ToApiModel());
+                return Ok(item);
             }
             catch(Exception ex)
             {

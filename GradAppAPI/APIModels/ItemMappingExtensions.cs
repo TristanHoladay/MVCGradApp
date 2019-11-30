@@ -18,7 +18,7 @@ namespace GradAppAPI.APIModels
                 Amount = item.Amount,
                 Cost = item.Cost,
                 StorageLocation = item.StorageLocation,
-                TypeId = item.ResourceTypeId,
+                ResourceTypeId = item.ResourceTypeId,
                 ResourceTypeName = item.ResourceType.Name,
                 CompanyId = item.CompanyId,
                 Company = item.Company != null
@@ -46,7 +46,7 @@ namespace GradAppAPI.APIModels
                 Cost = itemModel.Cost,
                 StorageLocation = itemModel.StorageLocation,
                 CompanyId = itemModel.CompanyId,
-                ResourceTypeId = itemModel.TypeId,
+                ResourceTypeId = itemModel.ResourceTypeId,
                 VehicleId = itemModel.VehicleId,
                 UseTicketId = itemModel.UseTicketId
 

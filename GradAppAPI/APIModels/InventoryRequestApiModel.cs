@@ -9,7 +9,7 @@ namespace GradAppAPI.APIModels
     {
         public int Id { get; set; }
 
-        public string userId { get; set; }
+        public string UserId { get; set; }
         public string User { get; set; }
 
         public int ResourceTypeId { get; set; }

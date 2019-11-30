@@ -16,13 +16,11 @@ namespace GradAppAPI.APIModels
 
         public string Notes { get; set; }
 
-        public string userId { get; set; }
+        public string UserId { get; set; }
         public string User { get; set; }
 
         public int companyId { get; set; }
         public string Company { get; set; }
-
-        public IEnumerable<Item> Items { get; set; }
 
     }
 }
