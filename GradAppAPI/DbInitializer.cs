@@ -166,9 +166,9 @@ namespace GradAppAPI
                 Description = "Ethernet Cable for desktops, printers, and servers.",
                 Amount = 30,
                 Cost = 1,
-                TypeId = 1,
+                ResourceTypeId = 1,
                 VehicleId = 1,
-                companyId = 1
+                CompanyId = 1
             };
 
             Item testItem2 = new Item
@@ -178,9 +178,9 @@ namespace GradAppAPI
                 Description = "USB 3.0 ports for desktops, laptops, printers, and servers.",
                 Amount = 22,
                 Cost = 5,
-                TypeId = 2,
+                ResourceTypeId = 2,
                 VehicleId = 2,
-                companyId = 1
+                CompanyId = 1
             };
 
             _itemRepo.Add(testItem1);

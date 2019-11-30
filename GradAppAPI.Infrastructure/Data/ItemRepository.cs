@@ -20,7 +20,7 @@ namespace GradAppAPI.Infrastructure.Data
 
         public IEnumerable<Item> GetAll(int CompanyId)
         {
-            IEnumerable<Item> itemList = _dbContext.Items.Where(i => i.companyId == CompanyId).ToList();
+            IEnumerable<Item> itemList = _dbContext.Items.Where(i => i.CompanyId == CompanyId).ToList();
 
             if (itemList == null)
                 return null;
@@ -29,7 +29,7 @@ namespace GradAppAPI.Infrastructure.Data
                 .Include(i => i.ResourceType)
                 .Include(i => i.Vehicle)
                 .Include(i => i.Company)
-                .Where(i => i.companyId == CompanyId)
+                .Where(i => i.CompanyId == CompanyId)
                 .ToList();
         }
 

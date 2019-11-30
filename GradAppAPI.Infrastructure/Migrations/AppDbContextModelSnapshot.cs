@@ -66,6 +66,8 @@ namespace GradAppAPI.Infrastructure.Migrations
 
                     b.Property<int>("Amount");
 
+                    b.Property<int>("CompanyId");
+
                     b.Property<int>("Cost");
 
                     b.Property<string>("Description");
@@ -84,17 +86,15 @@ namespace GradAppAPI.Infrastructure.Migrations
 
                     b.Property<int>("VehicleId");
 
-                    b.Property<int>("companyId");
-
                     b.HasKey("Id");
+
+                    b.HasIndex("CompanyId");
 
                     b.HasIndex("ResourceTypeId");
 
                     b.HasIndex("UseTicketId");
 
                     b.HasIndex("VehicleId");
-
-                    b.HasIndex("companyId");
 
                     b.ToTable("Items");
                 });
@@ -379,6 +379,11 @@ namespace GradAppAPI.Infrastructure.Migrations
 
             modelBuilder.Entity("GradAppAPI.Core.Models.Item", b =>
                 {
+                    b.HasOne("GradAppAPI.Core.Models.Company", "Company")
+                        .WithMany("Items")
+                        .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
                     b.HasOne("GradAppAPI.Core.Models.ResourceType", "ResourceType")
                         .WithMany("Resources")
                         .HasForeignKey("ResourceTypeId");
@@ -390,11 +395,6 @@ namespace GradAppAPI.Infrastructure.Migrations
                     b.HasOne("GradAppAPI.Core.Models.Vehicle", "Vehicle")
                         .WithMany("Resources")
                         .HasForeignKey("VehicleId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("GradAppAPI.Core.Models.Company", "Company")
-                        .WithMany("Items")
-                        .HasForeignKey("companyId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
