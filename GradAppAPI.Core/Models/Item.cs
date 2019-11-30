@@ -25,11 +25,11 @@ namespace GradAppAPI.Core.Models
         public string StorageLocation { get; set; }
 
         [Required]
-        public int TypeId { get; set; }
+        public int ResourceTypeId { get; set; }
         public ResourceType ResourceType { get; set; }
 
         //The item(s) belongs to a specific company
-        public int companyId { get; set; }
+        public int CompanyId { get; set; }
         public Company Company { get; set; }
 
         public int VehicleId { get; set; }
