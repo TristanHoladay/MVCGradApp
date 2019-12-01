@@ -101,6 +101,8 @@ namespace GradAppAPI
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserService, UserService>();
 
+            services.AddScoped<PasswordHasher<User>>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

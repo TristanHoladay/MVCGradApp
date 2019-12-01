@@ -41,27 +41,50 @@ namespace GradAppAPI.Controllers
 
         // GET api/<controller>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public IActionResult Get(string id)
         {
-            return "value";
-        }
-
-        // POST api/<controller>
-        [HttpPost]
-        public void Post([FromBody]string value)
-        {
+            try
+            {
+                return Ok(_userService.GetUserById(id).ToApiModel());
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("GetUsersError", ex.Message);
+                return NotFound(ModelState);
+            }
         }
 
         // PUT api/<controller>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        public IActionResult Put(int id, [FromBody]User user)
         {
+            try
+            {
+
+                return Ok(_userService.Update(user).ToApiModel());
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("GetUsersError", ex.Message);
+                return NotFound(ModelState);
+            }
         }
 
         // DELETE api/<controller>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<IActionResult> Delete(string id)
         {
+            try
+            {
+                var result = await _userService.Delete(id);
+                return NoContent();
+                
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("GetUsersError", ex.Message);
+                return NotFound(ModelState);
+            }
         }
     }
 }

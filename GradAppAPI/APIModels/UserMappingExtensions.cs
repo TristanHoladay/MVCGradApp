@@ -15,6 +15,7 @@ namespace GradAppAPI.APIModels
                 Id = user.Id,
                 FirstName = user.FirstName,
                 LastName = user.LastName,
+                FullName = user.FullName,
                 Email = user.Email,
                 AdminRole = user.AdminRole,
                 JobDescription = user.JobDescription  

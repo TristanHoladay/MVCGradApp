@@ -48,5 +48,41 @@ namespace GradAppAPI.Core.Services
             return users;
         }
 
+        public User GetUserById(string id)
+        {
+            User user = _userRepo.GetUserById(id);
+
+            if(user == null)
+            {
+                throw new ApplicationException("Cannot find user by given id.");
+            }
+
+            return user;
+        }
+
+        public User Update(User user)
+        {
+            User updatedUser = _userRepo.Update(user);
+
+            if(updatedUser == null)
+            {
+                throw new ApplicationException("Could not update user with the given Id.");
+            }
+
+            return updatedUser;
+        }
+
+        public async Task<IdentityResult> Delete(string id)
+        {
+            IdentityResult deletedUser = await _userRepo.Delete(id);
+
+            if(!deletedUser.Succeeded)
+            {
+                throw new ApplicationException("Could not delete the user with the given Id.");
+            }
+
+            return deletedUser;
+        }
+
     }
 }
