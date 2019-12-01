@@ -51,7 +51,7 @@ namespace GradAppAPI.Core.Services
 
         public UserVehicles Update(UserVehicles newUserVehicles)
         {
-            if (_userVehiclesRepo.Add(newUserVehicles) == null)
+            if (_userVehiclesRepo.Update(newUserVehicles) == null)
             {
                 throw new ApplicationException("Could not create the user-vehicle relationship.");
             }

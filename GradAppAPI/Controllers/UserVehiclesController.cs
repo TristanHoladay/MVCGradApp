@@ -25,7 +25,7 @@ namespace GradAppAPI.Controllers
         }
 
         // GET: api/<controller>
-        [HttpGet("{userId}")]
+        [HttpGet("/api/users/{userId}/uservehicles")]
         public IActionResult GetAllByUser(string userId)
         {
             try
