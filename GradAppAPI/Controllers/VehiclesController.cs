@@ -6,14 +6,15 @@ using GradAppAPI.APIModels;
 using GradAppAPI.Core.Models;
 using GradAppAPI.Core.Services;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace GradAppAPI.Controllers
 {
-    //[Authorize]
-    [AllowAnonymous]
+    [Authorize]
+    [EnableCors("AllowOrigin")]
     [Route("api/[controller]")]
     public class VehiclesController : Controller
     {
