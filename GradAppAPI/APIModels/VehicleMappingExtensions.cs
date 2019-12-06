@@ -25,7 +25,6 @@ namespace GradAppAPI.APIModels
         {
             return new Vehicle
             {
-                Id = vehicleModel.Id,
                 Name = vehicleModel.Name,
                 Model = vehicleModel.Model,
                 LicensePlate = vehicleModel.LicensePlate,

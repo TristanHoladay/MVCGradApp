@@ -22,7 +22,6 @@ namespace GradAppAPI.APIModels
         {
             return new Company
             {
-                Id = companyApiModel.Id,
                 Name = companyApiModel.Name,
                 Status = companyApiModel.Status
             };

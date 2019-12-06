@@ -28,7 +28,6 @@ namespace GradAppAPI.APIModels
         {
             return new UserVehicles
             {
-                Id = userVehicles.Id,
                 UserId = userVehicles.UserId,
                 VehicleId = userVehicles.VehicleId
             };

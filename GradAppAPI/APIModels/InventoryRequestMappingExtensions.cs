@@ -35,7 +35,6 @@ namespace GradAppAPI.APIModels
         {
             return new InventoryRequest
             {
-                Id = request.Id,
                 Date = request.Date,
                 Details = request.Details,
                 Complete = request.Complete,

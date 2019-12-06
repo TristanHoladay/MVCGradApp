@@ -31,7 +31,6 @@ namespace GradAppAPI.APIModels
         {
             return new UseTicket
             {
-                Id = useTicket.Id,
                 TISNumber = useTicket.TISNumber,
                 Date = useTicket.Date,
                 Notes = useTicket.Notes,

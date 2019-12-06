@@ -39,7 +39,6 @@ namespace GradAppAPI.APIModels
         {
             return new Item
             {
-                Id = itemModel.Id,
                 Name = itemModel.Name,
                 Description = itemModel.Description,
                 Amount = itemModel.Amount,
@@ -47,10 +46,8 @@ namespace GradAppAPI.APIModels
                 StorageLocation = itemModel.StorageLocation,
                 CompanyId = itemModel.CompanyId,
                 ResourceTypeId = itemModel.ResourceTypeId,
-                VehicleId = itemModel.VehicleId,
-                UseTicketId = itemModel.UseTicketId
-
             };
+
         }
 
         public static IEnumerable<ItemApiModel> ToApiModels(this IEnumerable<Item> items)

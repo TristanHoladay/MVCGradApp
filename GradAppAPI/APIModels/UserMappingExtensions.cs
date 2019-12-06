@@ -26,7 +26,6 @@ namespace GradAppAPI.APIModels
         {
             return new User
             {
-                Id = userModel.Id,
                 FirstName = userModel.FirstName,
                 LastName = userModel.LastName,
                 Email = userModel.Email,

@@ -62,11 +62,12 @@ namespace GradAppAPI.Controllers
         // POST api/companies
         //[Authorize(Roles = "Super Admin")]
         [HttpPost]
-        public IActionResult Post([FromBody]Company newCompany)
+        public IActionResult Post([FromBody]CompanyApiModel newCompany)
         {
             try
             {
-                return Ok(_companyService.Add(newCompany).ToApiModel());
+                Company company = _companyService.Add(newCompany.ToDomainModel());
+                return Ok(company.ToApiModel());
             }
             catch (Exception ex)
             {
@@ -78,11 +79,12 @@ namespace GradAppAPI.Controllers
         // PUT api/companies/5
         //[Authorize(Roles = "Super Admin")]
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody]Company updatedCompany)
+        public IActionResult Put(int id, [FromBody]CompanyApiModel updatedCompany)
         {
             try
             {
-                return Ok(_companyService.Update(updatedCompany).ToApiModel());
+                Company company = _companyService.Update(updatedCompany.ToDomainModel());
+                return Ok(company.ToApiModel());
             }
             catch(Exception ex)
             {

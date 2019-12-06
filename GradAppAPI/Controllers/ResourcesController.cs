@@ -80,12 +80,21 @@ namespace GradAppAPI.Controllers
         // PUT api/resources/5
         //[Authorize(Roles = "Super Admin, Admin, User")]
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody]Item updatedItem)
+        public IActionResult Put(int id, [FromBody]ItemApiModel updatedItem)
         {
             try
             {
-                var item = _itemService.Update(updatedItem);
-                return Ok(item.ToApiModel());
+                var item = updatedItem.ToDomainModel();
+                item.Id = id;
+
+                if (updatedItem.VehicleId > 0 && updatedItem.UseTicketId > 0)
+                {
+                    item.VehicleId = updatedItem.VehicleId;
+                    item.UseTicketId = updatedItem.UseTicketId;
+                }
+
+                _itemService.Update(item);
+                return Ok(item);
             }
             catch(Exception ex)
             {

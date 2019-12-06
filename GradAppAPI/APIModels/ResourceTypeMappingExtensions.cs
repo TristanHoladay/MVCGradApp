@@ -21,7 +21,6 @@ namespace GradAppAPI.APIModels
         {
             return new ResourceType
             {
-                Id = rtModel.Id,
                 Name = rtModel.Name,
             };
         }
