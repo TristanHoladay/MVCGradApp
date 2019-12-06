@@ -58,12 +58,14 @@ namespace GradAppAPI.Controllers
 
         // POST api/<controller>
         [HttpPost]
-        public IActionResult Post([FromBody]InventoryRequest request)
+        public IActionResult Post([FromBody]InventoryRequestApiModel request)
         {
             try
             {
-                InventoryRequest newRequest = _requestService.Add(request);
-                return Ok(request.ToApiModel());
+                var newRequest = request.ToDomainModel();
+                newRequest = _requestService.Add(newRequest);
+
+                return Ok(newRequest.ToApiModel());
             }
             catch (Exception ex)
             {
@@ -74,11 +76,15 @@ namespace GradAppAPI.Controllers
 
         // PUT api/<controller>/5
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody]InventoryRequest request)
+        public IActionResult Put(int id, [FromBody]InventoryRequestApiModel request)
         {
             try
             {
-                InventoryRequest updatedRequest = _requestService.Update(request);
+                var updatedRequest = request.ToDomainModel();
+                updatedRequest.Id = id;
+
+                updatedRequest = _requestService.Update(updatedRequest);
+
                 return Ok(updatedRequest.ToApiModel());
             }
             catch (Exception ex)

@@ -64,7 +64,8 @@ namespace GradAppAPI.Controllers
             try
             {
                 ResourceType newType = resourceType.ToDomainModel();
-                return Ok(_typeService.Add(newType).ToApiModel());
+                _typeService.Add(newType);
+                return Ok(newType.ToApiModel());
             }
             catch(Exception ex)
             {
@@ -78,8 +79,9 @@ namespace GradAppAPI.Controllers
         public IActionResult Put(int id, [FromBody]ResourceType resourceType)
         {
             try
-            {
-                return Ok(_typeService.Update(resourceType));
+            { 
+                var updatedType = _typeService.Update(resourceType);
+                return Ok(updatedType);
             }
             catch(Exception ex)
             {

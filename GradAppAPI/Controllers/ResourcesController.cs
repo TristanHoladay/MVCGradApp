@@ -63,11 +63,20 @@ namespace GradAppAPI.Controllers
         // POST api/resources
         //[Authorize(Roles = "Super Admin, Admin, User")]
         [HttpPost]
-        public IActionResult Post([FromBody]Item newItem)
+        public IActionResult Post([FromBody]ItemApiModel newItem)
         {
             try
             {
-                var item = _itemService.Add(newItem);
+                var item = newItem.ToDomainModel();
+
+                if (newItem.VehicleId > 0 && newItem.UseTicketId > 0)
+                {
+                    item.VehicleId = newItem.VehicleId;
+                    item.UseTicketId = newItem.UseTicketId;
+                }
+
+
+                _itemService.Add(item);
                 return Ok(item);
             }
             catch(Exception ex)

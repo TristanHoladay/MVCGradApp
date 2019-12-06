@@ -58,11 +58,13 @@ namespace GradAppAPI.Controllers
 
         // POST api/<controller>
         [HttpPost]
-        public IActionResult Post([FromBody]UseTicket useTicket)
+        public IActionResult Post([FromBody]UseTicketApiModel useTicket)
         {
             try
             {
-                UseTicket newTicket = _useTicketService.Add(useTicket);
+                UseTicket newTicket = useTicket.ToDomainModel();
+               newTicket = _useTicketService.Add(newTicket);
+
                 return Ok(newTicket.ToApiModel());
             }
             catch(Exception ex)
@@ -74,11 +76,15 @@ namespace GradAppAPI.Controllers
 
         // PUT api/<controller>/5
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody]UseTicket useTicket)
+        public IActionResult Put(int id, [FromBody]UseTicketApiModel useTicket)
         {
             try
             {
-                return Ok(_useTicketService.Update(useTicket).ToApiModel());
+                UseTicket updatedTicket = useTicket.ToDomainModel();
+                updatedTicket.Id = id;
+
+               updatedTicket =  _useTicketService.Update(updatedTicket);
+                return Ok(updatedTicket.ToApiModel());
             }
             catch (Exception ex)
             {

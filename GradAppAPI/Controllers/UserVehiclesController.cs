@@ -58,11 +58,14 @@ namespace GradAppAPI.Controllers
 
         // POST api/<controller>
         [HttpPost]
-        public IActionResult Post([FromBody]UserVehicles newUserVehicles)
+        public IActionResult Post([FromBody]UserVehiclesApiModel userVehicles)
         {
             try
             {
-                return Ok(_uvService.Add(newUserVehicles).ToApiModel());
+                var newUV = userVehicles.ToDomainModel();
+                newUV = _uvService.Add(newUV);
+
+                return Ok(newUV.ToApiModel());
             }
             catch (Exception ex)
             {
@@ -73,11 +76,14 @@ namespace GradAppAPI.Controllers
 
         // PUT api/<controller>/5
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody]UserVehicles updatedUserVehicles)
+        public IActionResult Put(int id, [FromBody]UserVehiclesApiModel userVehicles)
         {
             try
             {
-                return Ok(_uvService.Update(updatedUserVehicles).ToApiModel());
+                var updatedUV = userVehicles.ToDomainModel();
+                updatedUV = _uvService.Update(updatedUV);
+
+                return Ok(updatedUV.ToApiModel());
             }
             catch (Exception ex)
             {

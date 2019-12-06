@@ -65,11 +65,13 @@ namespace GradAppAPI.Controllers
         //[Authorize(Roles = "Super Admin, Admin, User")]
         [AllowAnonymous]
         [HttpPost]
-        public IActionResult Post([FromBody]Vehicle newVehicle)
+        public IActionResult Post([FromBody]VehicleApiModel newVehicle)
         {
             try
             {
-                return Ok(_vehicleService.Add(newVehicle).ToApiModel());
+                var vehicle = newVehicle.ToDomainModel();
+                _vehicleService.Add(vehicle);
+                return Ok(vehicle.ToApiModel());
             }
             catch(Exception ex)
             {
@@ -81,12 +83,12 @@ namespace GradAppAPI.Controllers
         // PUT api/vehicles/5
        // [Authorize(Roles = "Super Admin, Admin, User")]
        [AllowAnonymous]
-        [HttpPut("{id}")]
+       [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody]Vehicle updatedVehicle)
         {
             try
             {
-                var vehicle = _vehicleService.Update(updatedVehicle);
+               var vehicle = _vehicleService.Update(updatedVehicle);
                 return Ok(vehicle.ToApiModel());
             }
             catch(Exception ex)
