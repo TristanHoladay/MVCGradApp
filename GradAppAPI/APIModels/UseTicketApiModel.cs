@@ -21,6 +21,7 @@ namespace GradAppAPI.APIModels
 
         public int companyId { get; set; }
         public string Company { get; set; }
+        public string TicketT { get; set; }
 
     }
 }

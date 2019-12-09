@@ -25,5 +25,7 @@ namespace GradAppAPI.APIModels
 
         public int UseTicketId { get; set; }
         public string UseTicket { get; set; }
+
+        public string ItemT { get; set; }
     }
 }

@@ -13,6 +13,7 @@ namespace GradAppAPI.APIModels
         public string LicensePlate { get; set; }
         public string Status { get; set; }
         public string Notes { get; set; }
+        public string VehicleT { get; set; }
 
     }
 }

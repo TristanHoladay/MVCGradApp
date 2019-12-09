@@ -12,5 +12,6 @@ namespace GradAppAPI.APIModels
         public string UserName { get; set; }
         public int VehicleId { get; set; }
         public string Vehicle { get; set; }
+        public string UvT { get; set; }
     }
 }

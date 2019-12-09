@@ -15,5 +15,7 @@ namespace GradAppAPI.APIModels
         public string JobDescription { get; set; }
         public bool AdminRole { get; set; }
 
+        public string UserT { get; set; }
+
     }
 }

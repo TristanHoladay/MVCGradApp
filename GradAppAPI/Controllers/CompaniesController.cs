@@ -83,7 +83,9 @@ namespace GradAppAPI.Controllers
         {
             try
             {
-                Company company = _companyService.Update(updatedCompany.ToDomainModel());
+                Company company = updatedCompany.ToDomainModel();
+                company.Id = id;
+                company = _companyService.Update(company);
                 return Ok(company.ToApiModel());
             }
             catch(Exception ex)

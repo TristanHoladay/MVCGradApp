@@ -11,6 +11,8 @@ namespace GradAppAPI.APIModels
 
         public string Name { get; set; }
 
+        public string ResourceTypeT { get; set; }
+
         //public int CompanyId { get; set; }
         //public string CompanyName { get; set; }
     }

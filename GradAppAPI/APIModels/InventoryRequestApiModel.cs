@@ -21,5 +21,6 @@ namespace GradAppAPI.APIModels
         public string Details { get; set; }
         public DateTime Date { get; set; }
         public Boolean Complete { get; set; }
+        public string RequestT { get; set; }
     }
 }

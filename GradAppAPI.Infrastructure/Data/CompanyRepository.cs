@@ -78,7 +78,9 @@ namespace GradAppAPI.Infrastructure.Data
 
         public void Delete(int id)
         {
-            Company delCompany = Get(id);
+            //Company delCompany = Get(id);
+
+            Company delCompany = _dbContext.Companies.FirstOrDefault(c => c.Id == id);
 
             if (delCompany == null) return;
 
