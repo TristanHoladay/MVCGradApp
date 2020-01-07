@@ -28,7 +28,6 @@ namespace GradAppAPI.Core.Models
         public int ResourceTypeId { get; set; }
         public ResourceType ResourceType { get; set; }
 
-        //The item(s) belongs to a specific company
         public int CompanyId { get; set; }
         public Company Company { get; set; }
 

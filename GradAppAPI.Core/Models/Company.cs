@@ -11,7 +11,10 @@ namespace GradAppAPI.Core.Models
 
         [Required]
         public string Name { get; set; }
+
+        [Required]
         public string Status { get; set; }
+
         public IEnumerable<Item> Items { get; set; }
         public IEnumerable<UseTicket> Tickets { get; set; }
         public IEnumerable<InventoryRequest> Requests { get; set; }

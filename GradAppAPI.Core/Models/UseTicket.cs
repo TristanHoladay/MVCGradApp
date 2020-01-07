@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace GradAppAPI.Core.Models
@@ -10,11 +11,14 @@ namespace GradAppAPI.Core.Models
         public int Id { get; set; }
 
         //Ticket Number for ConnectWise Ticket
+        [Required]
         public int TISNumber { get; set; }
 
+        [Required]
         //Date UseTicket is created
         public DateTime Date { get; set; }
 
+        [Required]
         //Notes for clarifying details
         public string Notes { get; set; }
 

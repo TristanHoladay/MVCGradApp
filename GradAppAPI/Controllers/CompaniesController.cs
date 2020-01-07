@@ -28,7 +28,7 @@ namespace GradAppAPI.Controllers
 
 
         // GET: api/companies
-        //[Authorize(Roles = "Admin")]
+        [Authorize]
         [HttpGet]
         public IActionResult GetAll()
         {
@@ -43,7 +43,7 @@ namespace GradAppAPI.Controllers
             }
         }
 
-        //[Authorize(Roles = "Super Admin, Admin")]
+        [Authorize]
         // GET api/companies/5
         [HttpGet("{id}")]
         public IActionResult Get(int id)
@@ -60,7 +60,7 @@ namespace GradAppAPI.Controllers
         }
 
         // POST api/companies
-        //[Authorize(Roles = "Super Admin")]
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public IActionResult Post([FromBody]CompanyApiModel newCompany)
         {
@@ -77,7 +77,7 @@ namespace GradAppAPI.Controllers
         }
 
         // PUT api/companies/5
-        //[Authorize(Roles = "Super Admin")]
+        [Authorize(Roles = "Admin")]
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody]CompanyApiModel updatedCompany)
         {
@@ -96,7 +96,7 @@ namespace GradAppAPI.Controllers
         }
 
         // DELETE api/<controller>/5
-        //[Authorize(Roles = "Super Admin")]
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {

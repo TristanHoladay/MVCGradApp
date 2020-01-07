@@ -94,6 +94,7 @@ namespace GradAppAPI.Controllers
         }
 
         // DELETE api/<controller>/5
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
