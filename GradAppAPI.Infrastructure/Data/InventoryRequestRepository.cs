@@ -29,6 +29,30 @@ namespace GradAppAPI.Infrastructure.Data
                 .ToList();
         }
 
+        public IEnumerable<InventoryRequest> getRequestsByCompany(int id)
+        {
+            IEnumerable<InventoryRequest> requests = _dbContext.InventoryRequests.Where(r => r.CompanyId == id);
+
+            if (requests == null)
+                return null;
+
+            return _dbContext.InventoryRequests
+                .Where(r => r.CompanyId == id)
+                .ToList();
+        }
+
+        public IEnumerable<InventoryRequest> getRequestsByUser(string id)
+        {
+            IEnumerable<InventoryRequest> requests = _dbContext.InventoryRequests.Where(r => r.UserId == id);
+
+            if (requests == null)
+                return null;
+
+            return _dbContext.InventoryRequests
+                .Where(r => r.UserId == id)
+                .ToList();
+        }
+
         public InventoryRequest GetById(int id)
         {
             InventoryRequest request = _dbContext.InventoryRequests.FirstOrDefault(ir => ir.Id == id);

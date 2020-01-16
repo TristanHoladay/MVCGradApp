@@ -20,10 +20,14 @@ namespace GradAppAPI.Controllers
     {
 
         private readonly ICompanyService _companyService;
+        private readonly IInventoryRequestService _requestService;
+        private readonly IUseTicketService _ticketService;
 
-        public CompaniesController(ICompanyService companyService)
+        public CompaniesController(ICompanyService companyService, IInventoryRequestService requestService, IUseTicketService ticketService)
         {
             _companyService = companyService;
+            _requestService = requestService;
+            _ticketService = ticketService;
         }
 
 
@@ -51,6 +55,34 @@ namespace GradAppAPI.Controllers
             try
             {
                 return Ok(_companyService.Get(id).ToApiModel());
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("GetCompany", ex.Message);
+                return NotFound(ModelState);
+            }
+        }
+
+        [HttpGet("/api/companies/{id}/requests")]
+        public IActionResult GetRequests(int id)
+        {
+            try
+            {
+                return Ok(_requestService.getRequestsByCompany(id));
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("GetCompany", ex.Message);
+                return NotFound(ModelState);
+            }
+        }
+
+        [HttpGet("/api/companies/{id}/tickets")]
+        public IActionResult GetTickets(int id)
+        {
+            try
+            {
+                return Ok(_ticketService.getTicketsByCompany(id));
             }
             catch (Exception ex)
             {

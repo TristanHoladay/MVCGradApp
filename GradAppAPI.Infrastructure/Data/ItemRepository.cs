@@ -33,6 +33,18 @@ namespace GradAppAPI.Infrastructure.Data
                 .ToList();
         }
 
+        public IEnumerable<Item> getItemsByType(int id)
+        {
+            IEnumerable<Item> items = _dbContext.Items.Where(i => i.ResourceTypeId == id);
+
+            if (items == null)
+                return null;
+
+            return _dbContext.Items
+                .Where(i => i.ResourceTypeId == id)
+                .ToList();
+        }
+
         public Item Get(int id)
         {
             Item item = _dbContext.Items.FirstOrDefault(i => i.Id == id);

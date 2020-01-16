@@ -26,6 +26,30 @@ namespace GradAppAPI.Core.Services
             return requestList;
         }
 
+        public IEnumerable<InventoryRequest> getRequestsByCompany(int id)
+        {
+            IEnumerable<InventoryRequest> requests = _inventoryRequestRepo.getRequestsByCompany(id);
+
+            if(requests == null)
+            {
+                throw new ApplicationException("Could not get inventory requests for this company. None might exist.");
+            }
+
+            return requests; 
+        }
+
+        public IEnumerable<InventoryRequest> getRequestsByUser(string id)
+        {
+            IEnumerable<InventoryRequest> requests = _inventoryRequestRepo.getRequestsByUser(id);
+
+            if (requests == null)
+            {
+                throw new ApplicationException("Could not get inventory requests for this company. None might exist.");
+            }
+
+            return requests;
+        }
+
         public InventoryRequest GetById(int id)
         {
             InventoryRequest request = _inventoryRequestRepo.GetById(id);

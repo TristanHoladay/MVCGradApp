@@ -9,6 +9,10 @@ namespace GradAppAPI.Core.Services
     {
         IEnumerable<UseTicket> GetAll();
 
+        IEnumerable<UseTicket> getTicketsByCompany(int id);
+
+        IEnumerable<UseTicket> getTicketsByUser(string id);
+
         UseTicket GetById(int id);
 
         UseTicket Add(UseTicket newUseTicket);

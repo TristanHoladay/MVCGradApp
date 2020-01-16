@@ -20,10 +20,12 @@ namespace GradAppAPI.Controllers
     {
 
         private readonly IResourceTypeService _typeService;
+        private readonly IItemService _itemService;
 
-        public ResourceTypeController(IResourceTypeService typeService)
+        public ResourceTypeController(IResourceTypeService typeService, IItemService itemService)
         {
             _typeService = typeService;
+            _itemService = itemService;
         }
 
         // GET: api/<controller>
@@ -42,13 +44,27 @@ namespace GradAppAPI.Controllers
             }
         }
 
-        // GET api/<controller>/5
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
             try
             {
                 return Ok(_typeService.Get(id).ToApiModel());
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("GetById", ex.Message);
+                return NotFound(ModelState);
+            }
+        }
+
+        // GET api/<controller>/5
+        [HttpGet("/api/resourcetype/{id}/items")]
+        public IActionResult GetItems(int id)
+        {
+            try
+            {
+                return Ok(_itemService.getItemsByType(id));
             }
             catch(Exception ex)
             {

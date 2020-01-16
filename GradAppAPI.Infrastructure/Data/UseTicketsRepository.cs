@@ -30,6 +30,30 @@ namespace GradAppAPI.Infrastructure.Data
                 .ToList();
         }
 
+        public IEnumerable<UseTicket> getTicketsByCompany(int id)
+        {
+            IEnumerable<UseTicket> tickets = _dbContext.UseTickets.Where(ut => ut.CompanyId == id);
+
+            if (tickets == null)
+                return null;
+
+            return _dbContext.UseTickets
+                .Where(ut => ut.CompanyId == id)
+                .ToList();
+        }
+
+        public IEnumerable<UseTicket> getTicketsByUser(string id)
+        {
+            IEnumerable<UseTicket> tickets = _dbContext.UseTickets.Where(ut => ut.UserId == id);
+
+            if (tickets == null)
+                return null;
+
+            return _dbContext.UseTickets
+                .Where(ut => ut.UserId == id)
+                .ToList();
+        }
+
         public UseTicket GetById(int id)
         {
             UseTicket useTicket = _dbContext.UseTickets.FirstOrDefault(ut => ut.Id == id);

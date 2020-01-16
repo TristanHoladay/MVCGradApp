@@ -28,6 +28,7 @@ namespace GradAppAPI.Infrastructure.Data
             return _dbContext.Companies
                 .Include(c => c.Tickets)
                 .Include(c => c.Items)
+                .Include(c => c.Requests)
                 .ToList();
         }
 
@@ -43,6 +44,7 @@ namespace GradAppAPI.Infrastructure.Data
             return _dbContext.Companies
                 .Include(c => c.Tickets)
                 .Include(c => c.Items)
+                .Include(c => c.Requests)
                 .FirstOrDefault(c => c.Id == id);
         }
 
