@@ -19,12 +19,24 @@ namespace GradAppAPI.Core.Services
         {
             IEnumerable<Item> resources = _itemRepo.GetAll(companyId);
 
-            if(resources == null)
+            if (resources == null)
             {
                 throw new ApplicationException("There are no resources to display.");
             }
 
             return resources;
+        }
+
+        public IEnumerable<Item> getItemsByType(int id)
+        {
+            IEnumerable<Item> items = _itemRepo.getItemsByType(id);
+
+            if(items == null)
+            {
+                throw new ApplicationException("Could not get items for that resource type.");
+            }
+
+            return items;
         }
 
         public Item Get(int id)

@@ -25,6 +25,30 @@ namespace GradAppAPI.Core.Services
             return useTicketList;
         }
 
+        public IEnumerable<UseTicket> getTicketsByCompany(int id)
+        {
+            IEnumerable<UseTicket> tickets = _useTicketRepo.getTicketsByCompany(id);
+
+            if(tickets == null)
+            {
+                throw new ApplicationException("Could not get tickets for this company.");
+            }
+
+            return tickets;
+        }
+
+        public IEnumerable<UseTicket> getTicketsByUser(string id)
+        {
+            IEnumerable<UseTicket> tickets = _useTicketRepo.getTicketsByUser(id);
+
+            if(tickets == null)
+            {
+                throw new ApplicationException("Could not get tickets for that user.");
+            }
+
+            return tickets;
+        }
+
         public UseTicket GetById(int id)
         {
             UseTicket useTicket = _useTicketRepo.GetById(id);

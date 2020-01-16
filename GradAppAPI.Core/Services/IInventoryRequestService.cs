@@ -9,7 +9,12 @@ namespace GradAppAPI.Core.Services
     {
         IEnumerable<InventoryRequest> GetAll();
 
+        IEnumerable<InventoryRequest> getRequestsByCompany(int id);
+
+        IEnumerable<InventoryRequest> getRequestsByUser(string id);
+
         InventoryRequest GetById(int id);
+
 
         InventoryRequest Add(InventoryRequest newInventoryRequest);
 

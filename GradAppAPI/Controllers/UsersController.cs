@@ -19,10 +19,14 @@ namespace GradAppAPI.Controllers
     public class UsersController : Controller
     {
         private readonly IUserService _userService;
+        private readonly IUseTicketService _ticketService;
+        private readonly IInventoryRequestService _requestService;
 
-        public UsersController(IUserService userService)
+        public UsersController(IUserService userService, IUseTicketService ticketService, IInventoryRequestService requestService)
         {
             _userService = userService;
+            _ticketService = ticketService;
+            _requestService = requestService;
         }
 
         // GET: api/<controller>
@@ -48,6 +52,34 @@ namespace GradAppAPI.Controllers
             try
             {
                 return Ok(_userService.GetUserById(id).ToApiModel());
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("GetUsersError", ex.Message);
+                return NotFound(ModelState);
+            }
+        }
+
+        [HttpGet("/api/users/{id}/tickets")]
+        public IActionResult GetTickets(string id)
+        {
+            try
+            {
+                return Ok(_ticketService.getTicketsByUser(id));
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("GetUsersError", ex.Message);
+                return NotFound(ModelState);
+            }
+        }
+
+        [HttpGet("/api/users/{id}/requests")]
+        public IActionResult GetRequests(string id)
+        {
+            try
+            {
+                return Ok(_requestService.getRequestsByUser(id));
             }
             catch (Exception ex)
             {
