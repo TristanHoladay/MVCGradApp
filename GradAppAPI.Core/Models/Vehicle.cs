@@ -19,7 +19,10 @@ namespace GradAppAPI.Core.Models
         public string LicensePlate { get; set; }
 
         public string Status { get; set; }
+
         public string Notes { get; set; }
+
+        [Required]
         public bool CheckedOut { get; set; }
 
         public IEnumerable<Item> Resources { get; set; }

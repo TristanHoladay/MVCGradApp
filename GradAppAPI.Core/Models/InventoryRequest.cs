@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace GradAppAPI.Core.Models
@@ -18,8 +19,13 @@ namespace GradAppAPI.Core.Models
         public int CompanyId { get; set; }
         public Company Company { get; set; }
 
+        [Required]
         public string Details { get; set; }
+
+        [Required]
         public DateTime Date { get; set; }
+
+        [Required]
         public Boolean Complete { get; set; }
     }
 }

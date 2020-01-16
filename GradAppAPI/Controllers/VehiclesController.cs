@@ -28,8 +28,6 @@ namespace GradAppAPI.Controllers
 
 
         // GET: api/companies/companyId/vehicles
-        //[Authorize(Roles = "Super Admin, Admin, User")]
-        [AllowAnonymous]
         [HttpGet]
         public IActionResult GetAll()
         {
@@ -45,8 +43,6 @@ namespace GradAppAPI.Controllers
         }
 
         // GET api/vehicles/5
-        //[Authorize(Roles = "Super Admin, Admin, User")]
-        [AllowAnonymous]
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
@@ -62,7 +58,7 @@ namespace GradAppAPI.Controllers
         }
 
         // POST api/vehicles
-        //[Authorize(Roles = "Super Admin, Admin, User")]
+        [Authorize(Roles = "Admin")]
         [AllowAnonymous]
         [HttpPost]
         public IActionResult Post([FromBody]VehicleApiModel newVehicle)
@@ -81,8 +77,7 @@ namespace GradAppAPI.Controllers
         }
 
         // PUT api/vehicles/5
-       // [Authorize(Roles = "Super Admin, Admin, User")]
-       [AllowAnonymous]
+       [Authorize(Roles = "Admin")]
        [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody]Vehicle updatedVehicle)
         {
@@ -99,8 +94,7 @@ namespace GradAppAPI.Controllers
         }
 
         // DELETE api/vehicles/5
-        //[Authorize(Roles = "Super Admin, Admin")]
-        [AllowAnonymous]
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {

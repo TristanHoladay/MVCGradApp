@@ -30,6 +30,7 @@ namespace GradAppAPI.Controllers
         }
 
         // GET: api/<controller>
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult GetAll()
         {
@@ -46,6 +47,7 @@ namespace GradAppAPI.Controllers
         }
 
         // GET api/<controller>/5
+        [Authorize(Roles = "Admin")]
         [HttpGet("{id}")]
         public IActionResult Get(string id)
         {
@@ -89,6 +91,7 @@ namespace GradAppAPI.Controllers
         }
 
         // PUT api/<controller>/5
+        [Authorize(Roles = "Admin")]
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody]User user)
         {
@@ -105,6 +108,7 @@ namespace GradAppAPI.Controllers
         }
 
         // DELETE api/<controller>/5
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(string id)
         {
