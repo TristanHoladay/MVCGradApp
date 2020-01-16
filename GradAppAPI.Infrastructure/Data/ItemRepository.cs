@@ -50,7 +50,7 @@ namespace GradAppAPI.Infrastructure.Data
 
         public Item Add(Item newItem)
         {
-            Item item = _dbContext.Items.FirstOrDefault(i => i.Id == newItem.Id);
+            Item item = _dbContext.Items.FirstOrDefault(i => i.Name == newItem.Name);
 
             if (item != null)
                 return null;

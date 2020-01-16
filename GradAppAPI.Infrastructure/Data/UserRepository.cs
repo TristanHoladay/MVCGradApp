@@ -48,6 +48,7 @@ namespace GradAppAPI.Infrastructure.Data
             updatedUser.Email = user.Email;
             updatedUser.FirstName = user.FirstName;
             updatedUser.LastName = user.LastName;
+            updatedUser.JobDescription = user.JobDescription;
             //need to create method to update claims for user if AdminRole changes
             updatedUser.AdminRole = user.AdminRole;
            // updatedUser.PasswordHash = _passwordHasher.HashPassword(user, user.pass)
