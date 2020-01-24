@@ -42,7 +42,8 @@ namespace GradAppAPI.Controllers
                 Email = registration.Email,
                 FirstName = registration.FirstName,
                 LastName = registration.LastName,
-                AdminRole = registration.AdminRole
+                AdminRole = registration.AdminRole,
+                JobDescription = registration.JobDescription
             };
 
             try
