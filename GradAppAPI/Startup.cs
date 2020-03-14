@@ -45,14 +45,21 @@ namespace GradAppAPI
 
             services.AddHttpContextAccessor();
 
-            // TODO: add your DbContext
-            services.AddDbContext<AppDbContext>();
 
-            // TODO: add identity services
-            services.AddIdentity<User, IdentityRole>()
-                .AddEntityFrameworkStores<AppDbContext>();
+            //services.AddDbContext<AppDbContext>();
 
-            // TODO: add JWT support
+            // Use SQL Database if in Azure, otherwise, use SQLite
+            if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Production")
+                services.AddDbContext<AppDbContext>(options =>
+                        options.UseSqlServer(Configuration.GetConnectionString("TrackITDbConnection")));
+            else
+                services.AddDbContext<AppDbContext>(options =>
+                        options.UseSqlite("Data Source=../GradAppAPI.Infrastructure/inventoryTracker.db"));
+
+            // Automatically perform database migration
+            services.BuildServiceProvider().GetService<AppDbContext>().Database.Migrate();
+
+            // JWT support
             services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -70,12 +77,14 @@ namespace GradAppAPI
                 };
             });
 
-            services.AddScoped<IUserService, UserService>();
 
-            // TODO: add the DbInititializer service
-            services.AddScoped<DbInitializer>();
+            //Identity User
+            services.AddIdentity<User, IdentityRole>()
+                .AddEntityFrameworkStores<AppDbContext>();
 
-            // TODO: add your repositories and services
+            // DbInititializer service
+            //services.AddScoped<DbInitializer>();
+
             //Repositories and Services
             services.AddScoped<IVehicleService, VehicleService>();
             services.AddScoped<IVehicleRepository, VehicleRepository>();
@@ -103,10 +112,12 @@ namespace GradAppAPI
 
             services.AddScoped<PasswordHasher<User>>();
 
+            services.AddScoped<IUserService, UserService>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, DbInitializer dbInitializer)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -130,8 +141,7 @@ namespace GradAppAPI
                     template: "{controller}/{action=Index}/{id?}");
             });
 
-            // TODO: add call to dbInitializer
-            dbInitializer.Initialize();
+            //dbInitializer.Initialize();
         }
     }
 }

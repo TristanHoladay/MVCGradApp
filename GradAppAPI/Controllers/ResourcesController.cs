@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GradAppAPI.Controllers
 {
-    [Authorize]
+    [Authorize(AuthenticationSchemes = "Bearer")]
     [EnableCors("AllowOrigin")]
     [Route("api/[controller]")]
     public class ResourcesController : Controller
